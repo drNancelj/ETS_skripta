@@ -1,0 +1,893 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{mathtools}
+
+\newtheorem{defi}{Definicija}
+\newtheorem{trd}{Trditev}
+\newtheorem{izr}{Izrek}
+\newtheorem{lema}{Lema}
+\newenvironment{prim}[1][]{\par\medskip\noindent \textbf{Primer: }}{\medskip}
+\newenvironment{opom}[1][]{\par\medskip\noindent \textbf{Opomba: }}{\medskip}
+\newenvironment{spom}[1][]{\par\medskip\noindent \textbf{Spomnimo se: }}{\medskip}
+\newenvironment{posl}[1][]{\par\medskip\noindent \textbf{Posledica: }}{\medskip}
+
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	
+	{\scshape\Large Fakulteta za matematiko in fiziko \par}
+	\vspace{2cm}
+
+	{\Huge\bfseries Elementarna teorija števil\par}
+	\vspace{2cm}
+	{\Large Nace Zavrtanik\par}
+	
+	\vfill
+
+	{\large 2016/2017\par}
+\end{titlepage}
+\noindent Nastanek teh skript je motivirala predvsem želja po urejenih zapiskih pri predmetu Elementarna teorija števil, delno pa sem želel tudi olajšati študij tega predmeta svojim kolegom. Snov je v celoti povzeta po predavanjih profesorja Saša Strleta, kot jo je predaval v študijskem letu 2016/17. Moja skromna vloga pri nastanku tega teksta je večinoma ta prepisovalca, ponekod pa tudi dopolnim dokaze, ki so na predavanjih bili izpuščeni bodisi zaradi preproste narave bodisi zaradi obravnave pri predmetih, ki naj bi na tej točki že bili opravljeni.
+
+\newpage
+
+	\tableofcontents
+	\newpage
+
+\section{Uvod}
+
+Samo ime predmeta, Elementarna teorija števil, nakazuje na to, da bomo števila preučevali z elementarnimi sredstvi, t. j. z znanjem, ki je bilo osvojeno že pri Analizi 1, Algebri 1 in Algebri 2. Toda kaj matematiki sploh razumemo kot števila?
+
+\subsection{Številske množice}
+
+\begin{defi}
+\textbf{Številska množica} je množica, opremljena z operacijama seštevanja $"+"$ in množenja $"\cdot "$.
+\end{defi}
+
+\begin{prim}
+ $\mathbb{N},\ \mathbb{N}_{0}:=\mathbb{N} \cup \{ 0 \},\ \mathbb{Z} ,\ \mathbb{Q} ,\ \mathbb{R} ,\ \mathbb{H}.$
+\end{prim}
+
+Operaciji $+$ in $\cdot$ imata neke lastnosti, same številske množice pa razlikujemo na podlagi tega, kako daleč sta operaciji od tega, da bi bili "lepi". Tako so naravna števila zgolj polgrupa, s priključitvijo elementa $0$ postanejo monoid, cela števila so kolobar, racionalna in realna števila pa polje. Z dodajanjem ustreznih elementov tako prehajamo s preprostih na naravno sledeče algebrske strukture. Tukaj velja omeniti, da pa prehod z racionalnih na realna števila ni algebrske narave, temveč topološke, saj je $\mathbb{R}$ ravno napolnitev topološkega prostora $\mathbb{Q}$.
+
+V teoriji števil nas številske množice od $\mathbb{Q}$ naprej ne bodo zanimale, saj se bomo ukvarjali predvsem z \textit{aritmetičnimi} lastnostmi števil, t. j. z lastnostmi, povezanimi z deljivostjo. Ukvarjali se bomo z elementi, ki nimajo multiplikativnega inverza, zato obsegov, v katerih je obrnljiv vsak element, ne bomo obravnavali. To nas pripelje do naslednje definicije:
+
+\begin{defi}
+Naj bo $K$ kolobar in $a \in K$. Element $a$ je \textbf{enota}, če ima multiplikativni inverz.
+\end{defi}
+
+Od tod pride pojem praštevila, ki je osnova pri študiju naravnih števil. Poleg $\mathbb{N}$ in $\mathbb{Z}$ pa obstajajo še številne druge številske množice, ki so podmnožice katerega od zgorjih obsegov.
+
+\begin{prim}
+\begin{enumerate}
+\item $\mathbb{Z}[\frac{1}{2}] = \{a_{0} + a_{1}\frac{1}{2} + a_{2}(\frac{1}{2})^{2} + \dots +  a_{n}(\frac{1}{2})^{n} \mid \forall i. a_{i}\in \mathbb{Z}, n \in \mathbb{N}_{0} \}$
+
+Velja $\mathbb{Z} \leq \mathbb{Z}[\frac{1}{2}] \leq \mathbb{Q}$.
+
+V kolobar $\mathbb{Z}$ smo dodali inverz števila $2$. S tem je število $2$ postalo enota.
+
+\item $\mathbb{Z}[\sqrt{2}] = \{a + b\sqrt{2}  \mid  a, b\in \mathbb{Z}\}$
+
+Velja $\mathbb{Z} \leq \mathbb{Z}[\sqrt{2}] \leq \mathbb{R}$.
+
+\item $\mathbb{Z}[i] = \{a + bi  \mid  a, b\in \mathbb{Z}\}$
+
+Velja $\mathbb{Z} \leq \mathbb{Z}[i] \leq \mathbb{C}$.
+
+Množico $\mathbb{Z}[i]$ imenujemo tudi \textit{Gau{\ss}ova cela števila}.
+
+\end{enumerate}
+\end{prim}
+
+Sedaj, ko imamo številske množice, lahko na njih definiramo relacijo deljivosti.
+
+\subsection{Deljivost}
+
+\begin{defi}
+Naj bo $S$ številska množica in $a,b \in S$. Pravimo, da $b$ \textbf{deli} $a$, če obstaja taki $c \in S$, da velja $a=b\cdot c$. Pišemo $ b|a.$
+\end{defi}
+
+\begin{prim}
+Za različne številske množice $S$ bomo poiskali delitelje števila $a=2$:
+\begin{enumerate}
+
+\item $S=\mathbb{N}:$
+
+$b|a$, če velja $b=1$ ali $b=2$.
+
+\item $S=\mathbb{Z}:$
+
+$b|a$, če velja $b=\pm 1$ ali $b=\pm 2$.
+
+V $\mathbb{Z}$ imamo več deliteljev kot v $\mathbb{N}$, saj je v $\mathbb{Z}$ več enot. Poleg števila $1$ je obrnljivo namreč tudi število $-1$.
+
+\item $S=\mathbb{Z}[\frac{1}{2}]:$
+
+$b|a$, če velja $b=\pm \frac{1}{2}, \pm \frac{1}{4}, \pm \frac{1}{8},\dots$ ali  $b=\pm 1, \pm 2, \pm4, \pm 8, \dots$, torej $$b=\pm 2^{n}, n \in \mathbb{N}.$$ Opazimo, da so v $S$ vsa ta števila spet enote, saj za $c=\mp 2^{1-n}$ velja $b\cdot c = 2$.
+
+\item $S=\mathbb{Z}[\sqrt{2}]:$
+
+$b|a$, če velja $b=\pm1, \pm \sqrt{2}, \pm 2, \pm(2\pm\sqrt{2})$.
+
+Hitro preverimo, da zgornja števila res delijo $a$. Pojavi pa se vprašanje, ali so to res \textit{vsi} delitelji za $a$. V prejšnjih primerih smo tudi opazili, da če $b$ deli $a$, potem za poljubno enoto $e$ produkt $b\cdot e$ prav tako deli $a$. Zato se dodatno vprašamo, ali so zgornji delitelji za $a$ bistveno različni v smislu, da se ne razlikujejo le za enoto. 
+
+Odgovorimo najprej na drugo vprašanje:
+$$ 2 + \sqrt{2} = \sqrt{2}(\sqrt{2} + 1)$$
+Ker velja $(\sqrt{2} + 1)\cdot (\sqrt{2} - 1) = 1 $, se delitelja $\sqrt{2}$ in $\sqrt{2} + 1$ res razlikujeta le za enoto.
+
+Če želimo poiskati še vse delitelje, moramo poiskati vse enote. Iščemo torej take $a,b \in \mathbb{Z}$, da bo $a + b\sqrt{2}$ enota (tukaj sta $a$ in $b$ neznanki in nista povezani s številom $a$ in njegovimi delitelji $b$ iz primera).
+$$
+\exists c,d \in \mathbb{Z}. (a + b\sqrt{2})(c + d\sqrt{2}) = 1
+$$
+
+Ta enačba je ekvivalenta enačbi
+$$
+ac+2bd-1=-\sqrt{2}(ad+bc),
+$$
+
+za katero vemo, da je njena leva stran cela, saj so cela števila zaprta za seštevanje in množenje. Za desno stran pa lahko trdimo, da bo iracionalna, razen pod pogojem, da je $ad+bc=0$. Veljati mora torej $ad=-bc$, kar je gotovo res, če $c=a$ in $d=-b$, če $c=k\cdot a$ in $d=-b\cdot k$ ali simetrično $a=l\cdot c$ in $b=-l\cdot d$. Pokazali bomo, da lahko velja le prva izmed teh treh možnosti. Če v zgornjo enačbo vstavimo pogoj $ad+bc=0$, dobimo enakost $ac+2bd=1$. S pomočjo te enakosti lahko razmislimo, da sta si števili $a$ in $b$ tuji:
+
+Naj bo $a=a_{1}e$ in $b = b_{1}e$. Sledi $e(a_{1}c + 2b_{1}d)=1$, zato po definiciji $e|1$. Število $e$ je torej bodisi $1$ bodisi $-1$, $a$ in $b$ pa sta si posledično tuji. Analogno lahko sklepamo, da sta si tuji tudi števili $c$ in $d$.
+
+Ker smo prepostavili $ad=-bc$, sledi, da $a|bc$, ker pa sta $a$ in $b$ tuji si števili, mora veljati $a|c$. Simetrično pokažemo, da $c|a$, od koder sklepamo, da res velja možnost $a=c$ in $b=-d$. Če sedaj dobljeni zvezi vstavimo v enakost $ac+2bd=1$, dobimo \textbf{Pellovo enačbo}
+$$a^{2} - 2b^{2}=1.$$
+Vse enote v  $\mathbb{Z}[\sqrt{2}]$ so celoštevilske rešitve te Pellove enačbe.
+
+\item  $S=\mathbb{Z}[i]:$
+
+$b|a$, če velja $b=\pm 1, \pm 2, \pm 1 + \pm i,\dots$
+\end{enumerate}
+\end{prim}
+
+Ti primeri motivirajo definicijo:
+
+\begin{defi}
+Naj bo $S$ številska množica in $a\in S$. Element $a$ je \mbox{\textbf{nerazcepen}}, če iz $a=bc$ sledi, da je vsaj eden od elementov $b$ in $c$ enota.
+\end{defi}
+
+\begin{opom}
+V $S=\mathbb{N}$ so nerazcepni elementi, ki niso enote, praštevila.
+\end{opom}
+
+\begin{defi}
+Naj bo $S$ številska množica in $a\in S$. Element $a$ je \textbf{primitivni element} ali \textbf{praelement}, če iz $a|bc$ sledi $a|b$ ali $a|c$.
+\end{defi}
+
+\begin{opom}
+V $S=\mathbb{N}$ tudi to določa praštevila.
+\end{opom}
+
+\begin{opom}
+V splošnem pojma nerazcepnega in primitivnega elementa nista ekvivalentna: \\
+$S=\mathbb{Z}[\sqrt{2}, i]:$
+
+$2=\sqrt{2} \cdot \sqrt{2}=(1+i)(1-i)$, torej $\sqrt{2} | (1+i)(1-i)$, vendar $\sqrt{2} \nmid (1+i)$ in $\sqrt{2} \nmid (1-i)$.
+\end{opom}
+
+\subsection{Diofantske enačbe in verižni ulomki}
+
+Pri teoriji števil nas bodo zanimale tud celoštevilske rešitve diofantskih enačb.
+
+\begin{defi}
+\textbf{Diofantska enačba} je polinomska enačba s celimi koeficienti.
+\end{defi}
+
+\begin{prim}
+\begin{enumerate}
+\item linearne diofantske enačbe: $ax+by=c$, kjer $a,b,c \in \mathbb{Z}$
+\item pitagorejske trojice: $x^{2} + y^{2} = z^{2}$
+\item Pellova enačba: $y^{2}-ax^{2}=1$
+\item $x^{2} + y^{2} = a$
+\end{enumerate}
+\end{prim}
+
+Enačbi v 3. in 4. primeru sta primera binarnih kvadratnih form nad $\mathbb{Z}$. 
+
+\begin{spom}
+Če je $M$ kvadratna forma nad $\mathbb{R}$, ima same realne lastne vrednosti (v splošnem so kompleksne), pripadajoči lastni vektorji pa so linearno neodvisni. Posledično obstaja baza iz lastnih vektorjev, kar pomeni, da lahko $M$ diagonaliziramo. Za kvadratne forma nad $\mathbb{Z}$ to ne velja in so v splošnem veliko bolj zakomplicirane.
+\end{spom}
+
+Še en objekt, ki ga bomo študirali pri teoriji števil, so \textbf{verižni ulomki}, o katerih bomo več povedali kasneje.
+
+\section{Naravna števila}
+
+Naravna števila $\mathbb{N} = \{1,2,3,4,\dots\}$ so prva številska množica, s katero se srečamo pri učenju matematike, in ponavadi jih opišemo kar kot "števila, s katerimi štejemo". Nas bo zanimala formalna definicija naravnih števil, ki bo opisala bistvene lastnosti te številske množice.
+
+\subsection{Peanovi aksiomi}
+
+\begin{defi}[Peanovi aksiomi]
+\textbf{Množica naravnih števil} je množica $N$ skupaj s funkcijo $\phi : N\to N$, ki vsakemu elementu $n\in \mathbb{N}$ priredi svojega \textbf{neposrednega naslednika}. Množica $N$ mora ustrezati naslednjim aksiomom:
+\begin{itemize}
+\item[P1.] $\exists \epsilon \in N. \epsilon \neq \phi(n)$
+\item[P2.] Funkcija $\phi$ je injektivna.
+\item[P3.] Za podmnožico $A\subseteq N$ velja:
+če $\epsilon \in A$ in če je za vsak $n\in A$ tudi $\phi(n) \in A$, potem velja $A=N$.
+\end{itemize}
+\end{defi}
+
+\begin{opom}
+Aksiom \textit{P3} je načelo popolne matematične indukcije.
+\end{opom}
+
+Kako pa množica N iz definicije sploh izgleda? Iz \textit{P1} sledi $$ N\supseteq \{\epsilon, \phi(\epsilon),\phi(\phi(\epsilon)),\dots\}.$$ V množici $N$ imamo torej $\epsilon$ in vse njegove naslednike, vendar bi $N$ lahko vsebovala še katera druga števila. Šele aksiom \textit{P3} nam zagotovi, da je v zgornjem izrazu v bistvu kar enakost. Velja torej  $$ N = \{\epsilon, \phi(\epsilon),\phi(\phi(\epsilon)),\dots\}.$$ Sedaj lahko za elemente množice $N$ vpeljemo oznake, ki so nam bliže za operiranje s števili, in sicer $1:=\epsilon, 2:=\phi(\epsilon), 3:=\phi(\phi(\epsilon)),$ itn. Včasih nam ustreza tudi število nič obravnavati kot naravno število. V tem primeru podobno definiramo $0:=\epsilon, 1:=\phi(\epsilon), 2:=\phi(\phi(\epsilon)),$ itn.
+
+\subsection{Vpeljava operacij}
+
+Sedaj vemo, kaj so elementi naše množice naravnih števil $N$, da bo zares postala številska množica, pa je potrebno definirati še operaciji seštevanja $"+"$ in množenja $"\cdot"$. Operaciji definiramo induktivno na sledeč način:
+
+\begin{align*}
+n+\epsilon&:=\phi(n) \\
+n+m&:=\phi(n+m)\\
+&\\
+n\cdot \epsilon &:= n \\
+n\cdot \phi(n+m)&:=n\cdot m + n
+\end{align*}
+
+Iz teh definicij lahko določimo osnovne lastnosti računskih operacij. Te so asociativnost, komutativnost, distributivnost in pa pravili krajšanja. Pravili krajšanja se glasita:
+
+\begin{align*}
+ n+l &= m+l\Rightarrow n=m \\
+n\cdot l &= m\cdot l \Rightarrow n=m
+\end{align*}
+
+Pokazali bomo, do prvo pravilo krajšanja res velja, drugo pa se dokaže na podoben način. Dokaza se bomo lotili z indukcijo po $l$. V nadaljevanju bomo uporabljali standardne oznake za naravna števila, samo množico bomo pa označevali z $\mathbb{N}$.
+
+\begin{itemize}
+\item[$l=1:$] $n+1 = m+1  \iff \phi(n) = \phi(m) \xRightarrow{inj.} n=m$ \checkmark
+\item[$l\rightarrow l+1:$] $n+\phi(l)=m+\phi(l) \iff \phi(n+l) = \phi(m+l) \xRightarrow{inj.} n+l = n+m \xRightarrow{I.P.} n=m$ \checkmark
+\end{itemize}
+
+\subsection{Urejenost}
+
+S pomočjo operacij v množico naravnih števil $\mathbb{N}$ uvedemo urejenost. Za elementa $n,m\in \mathbb{N}$ definiramo relaciji $<$ in $\leq$ na sledeč način:
+
+\begin{align*}
+n&<m \iff \exists k\in \mathbb{N}. n+k=m \\
+n&\leq m \iff n<m\text{ ali }n=m
+\end{align*}
+
+Relacijo $>$ (in $\geq$) smiselno definiramo kot negacijo $\leq$ (in $<$).
+
+\begin{trd}
+Za vsak $n\in \mathbb{N}$ velja $1\leq n$ in množica $\mathbb{N}$ je linearno urejena.
+\end{trd}
+
+\begin{spom}
+Relacija $R$ je relacija linearne urejenosti na množici $A$, če za vsake $a,b,c \in A$ velja:
+\begin{enumerate}
+\item \textit{refleksivnost:} $a\ R\ a$
+\item \textit{antisimetričnost:} $a\ R\ b$ in $b\ R\ a \implies a=b$
+\item \textit{tranzitivnost:} $a\ R\ b$ in $b\ R\ c \implies a\  R\ c$
+\item \textit{sovisnost:} $a\ R\ b$ ali $b\ R\ a$
+\end{enumerate}
+\end{spom}
+
+Pri dokazu linearne urejenosti bomo dokazali le varianto sovisnosti, ki pravi, da za $n,m \in \mathbb{N}$ velja natanko ena izmed možnosti $n=m$, $n < m$ ali $m<n$.
+
+\begin{proof}
+Prvi del izreka bomo dokazali z indukcijo.
+\begin{itemize}
+\item[$n=1:$] $1\leq 1$ \checkmark
+\item[$n\rightarrow n+1:$] Poljubno naravno število $n\neq1$ je oblike $n=\phi(m)=m+1$ za neki naravni $m$. Velja $1<1+m=n$. \checkmark
+\end{itemize}
+Za dokaz linearne urejenosti bomo ločili tri primere, in sicer:
+\begin{itemize}
+\item[$n=m:$] Če bi veljalo $n<m$, bi po definiciji relacije $<$ obstajal neki $k\in \mathbb{N}$, da bi veljalo $n+k=m=n$. Če sedaj $n=1$, dobimo $1=1+k=\phi(k)$, kar je protislovje s Peanovim aksiomom \textit{P1}. Če  je pa $n>1$, velja $n=\phi(l)=l+1$ za neki naravni $l$. Sledi $l+1+k=l+1\xRightarrow[krajšanja]{pravilo} 1+k=\phi(k)=1$, kar pa je spet protislovje s \textit{P1}. Pridemo do sklepa, da ne velja $n<m$, simetrično pa sklepamo tudi $m<n$. Velja torej res natanko ena izmed možnosti $n=m$, $n < m$ ali $m<n$.
+\item[$n\neq m$ in $n<m:$] Če bi veljalo $m<n$, bi spet obstajal neki $l\in\mathbb{N}$, da bi veljalo $n=m+l$. Po predpostavki $n<m$ obstaja $k\in\mathbb{N}$, da velja $n+k=m$. Iz obeh enakosti sledi
+\begin{align*}
+&(m+l)+k=m\text{ in} \\
+&m+(l+k)=m,
+\end{align*}
+kar nas pripelje do istega protislovja kot v zgornjem primeru.
+\item[$n\neq m$ in $\neg (n<m):$] Pokazati moramo, da velja možnost $m<n$. Definirajmo množici
+\begin{align*}
+A_{1}&:=\{1,2,\dots,m-1\}\text{ in}\\
+A_{2}&:=\{m+1,m+2,\dots\}.
+\end{align*}
+Ker so vsa števila v množici $A_{1}$ manjša od $m$, gotovo $n\notin A_{1}$. Po predpostavki prav tako velja $n\neq m$. Množica $A:= A_{1} \cup \{m\} \cup A_{2}$ zadošča pogojem v Peanovem aksiomu \textit{P3}, kar implicira $A=\mathbb{N}$. Ker $n\in A$ in $n\notin A_{1}, n \neq m$, sledi $n\in A_{2}$ oz. $m<n$.
+\end{itemize}
+\end{proof}
+
+\begin{defi}
+Množica $A$ je \textbf{dobro urejena}, če ima vsaka neprazna podmnožica $S \subseteq A, S\neq \emptyset,$ najmanjši element.
+\end{defi}
+
+\begin{izr}
+Množica naravnih števil $\mathbb{N}$ je dobro urejena.
+\end{izr}
+
+\begin{proof}
+Naj bo $S\subseteq \mathbb{N}, S\neq \emptyset$. Ločili bomo primera, ko $1 \in S$ in ko $1\notin S$:
+\begin{itemize}
+\item[$1\in S:$] Trditev 1 nam pove, da $1\leq n$ za vsak $n\in \mathbb{N}$, torej je kar število $1$ iskani najmanjši element množice $S$.
+\item[$1\notin S:$] Tukaj bomo obstoj najmanjšega elementa pokazali s protislovjem. Predpostavimo torej, da množica $S$ nima najmanjšega elementa. Ker $S\neq \emptyset$, obstaja $n_{0}\in S$, ki pa ni najmanjši element množice $S$. Obstaja torej $n_{1} \in S, n_{1} < n_{0}$. Ker $S$ nima najmanjšega elementa, podobno obstaja $n_{2} \in S, n_{2} < n_{1}$. Postopek ponavljamo in pridemo do rezultata, da množica $S$ vsebuje neskončno elementov, ki so manjši od $n_{0}$. To nas pripelje v protislovje, saj lahko množica $S$ vsebuje kvečjemu $n_{0}-2$ elementov, ki so manjši od $n_{0}$ ($1$ namreč ni element $S$).
+\end{itemize}
+\end{proof}
+
+\begin{opom}
+Dobra urejenost je ekvivalentna Peanovemu aksiomu \textit{P3}.
+\end{opom}
+
+\subsection{Vložitev naravnih števil v cela števila}
+
+Naravno števila lahko vložimo v cela števila.
+$$\mathbb{N} \hookrightarrow \mathbb{Z}=\mathbb{N} \cup \{0\} \cup \{-n \mid n \in \mathbb{N}\}$$
+Seštevanje definiramo na sledeč način:
+
+\[ 
+n+(-m):=
+\begin{cases}
+k &; n>m, \text{ kjer } n=m+k \\
+-k &; n<m, \text{ kjer } m=n+k
+\end{cases}
+\]
+Vse lastnostni operacij se ohranijo, pridobimo pa inverze za seštevanje.
+
+Urejenost lahko prenesemo z naravnih števil tako, da za vsaka $x,y \in \mathbb{Z}$ identično definiramo
+$$x<y \iff \exists k \in \mathbb{N}.\  x+k=y. $$
+
+\begin{opom}
+Naj bo $n<m,\ n,m \in\mathbb{N}$. Po definiciji obstaja $k\in \mathbb{N}$, da velja $n+k=m$. Od tod sledi $(-m) + k = (-n)$, kar pomeni, da $-m < -n$. Opazimo torej, da se neenačaj pri "množenju z $-1$" obrne.
+\end{opom}
+
+\subsection{Vložitev celih števil v racionalna števila}
+
+Cela števila lahko vložimo v racionalna števila.
+$$\mathbb{Z} \hookrightarrow \mathbb{Q}=\{ \frac{m}{n} \mid m \in \mathbb{Z}, n\in \mathbb{N}  \}/\sim$$
+ Množica $\mathbb{Q}$ je torej kvocientna množica, kjer je ekvivalenčna relacija $\sim$ definirana takole:
+
+$$ \frac{m_{1}}{n_{1}} \sim \frac{m_{2}}{n_{2}} \iff m_{1}n_{2}=n_{1}m_{2}.$$
+
+\subsection{Vložitev racionalnih števil v realna števila}
+
+Racionalna števila lahko vložimo v realna števila.
+$$\mathbb{Q} \hookrightarrow \mathbb{R}$$
+Množica $\mathbb{R}$ je napolnitev topološkega prostora $\mathbb{Q}$ v standardni metriki.
+
+
+\section{Deljivost}
+\section{Diofantske enačbe}
+\section{Multiplikativne funkcije}
+\section{Kongruence}
+
+\subsection{Definicija in osnovne lastnosti}
+
+\begin{defi}
+Naj bosta $a,b\in \mathbb{Z}$ in naj bo $n \in \mathbb{N}$. Ekvivalenčno relacijo kongruence $\equiv$ po modulu $n$ definiramo na sledeč način:
+$$a\equiv b \pmod n \iff n|(a-b).$$
+Rečemo, da sta si števili $a$ in $b$ \textbf{kongruentni po modulu $n$}.
+\end{defi}
+
+\begin{opom}
+Števili $a$ in $b$ sta si kongruentni po modulu $n$ natanko tedaj, ko imata enak ostanek pri deljenju z $n$.
+\end{opom}
+
+Ker je relacija kongruence ekvivalenčna, pri fiksnem številu $n$ množica $\mathbb{Z}$ razpade na ekvivalenčne razrede, ki jim pravimo \textbf{kongruenčni razredi}. Kvocientno množico $\mathbb{Z}/_{\equiv}$ označimo z $\mathbb{Z}_{n}$,
+$$\mathbb{Z}_{n} = \{[0], [1],\dots,[n-1]\}.$$
+Posamezne ekvivalenčne razrede $[k]$ nato kar identificiramo z njihovimi predstavniki $k, \ 1\leq k \leq n-1$, in pišemo
+$$\mathbb{Z}_{n} = \{0, 1,\dots,n-1\}.$$
+Tako izbranim predstavnikom pravimo \textbf{standardni predstavniki kongruenčnih razredov}.
+
+Na $\mathbb{Z}_{n}$ definiramo seštevanje po modulu $n$ in množenje po modulu $n$ kot običajno seštevanje in množenje v $\mathbb{Z}$, pri čemer dobljeni rezultat zamenjamo s standardnim predstavnikom njegovega kongruenčnega razreda. Hitro lahko preverimo, da sta taki operaciji dobro definirani. Za ti operaciji seštevanja in množenja po modulu $n$ postane množica $\mathbb{Z}_{n}$ grupa za seštevanje in celo kolobar, ki pa v splošnem ni obseg.
+
+\begin{opom}
+Kolobar $\mathbb{Z}_{n}$ je obseg natanko tedaj, ko je $n$ praštevilo.
+\end{opom}
+
+\begin{trd}
+Če velja $a\equiv b \pmod n$ in $c\equiv d \pmod n$, potem velja
+\begin{enumerate}
+\item $a+c\equiv b+d \pmod n$
+\item $a\cdot c\equiv b\cdot d \pmod n$
+\item $a^{m}\equiv b^{m} \pmod n$ za vsak $m\in \mathbb{N}$
+\end{enumerate}
+\end{trd}
+
+\begin{proof}
+Iz $a\equiv b \pmod n$ sledi $a=b+kn$, prav tako iz $c\equiv d \pmod n$ sledi $c=d+ln$. Velja torej
+\begin{enumerate}
+\item $a+c=b+kn + d + ln= b+d +(k+l)n \equiv b+d \pmod n$
+\item $a\cdot c=(b+kn)(d+ln)=b\cdot d +(bl+dk+kln)n\equiv b\cdot d\pmod n$
+\item $a^{m}=(b+kn)^{m}=b^{m}+\binom{m}{1}b^{m-1}kn+\dots+\binom{m}{m-1}b(kn)^{m-1} + (kn)^{m}=b^{m}+nk(\ldots)\equiv b^{m} \pmod n$
+\end{enumerate}
+\end{proof}
+
+\begin{trd}
+\label{osnovne}
+Veljajo naslednje trditve:
+\begin{enumerate}
+\item $a\equiv b \pmod n$ in $d\mid n \implies a\equiv b\pmod d$
+\item $a\equiv b \pmod{n_{i}},\ i=1,2,\ldots k$ in $n_{i}$ so si paroma tuji$\implies a\equiv b\pmod {\prod_{i=1}^{k} n_{i}}$
+\item $ac\equiv bc\pmod n \implies a\equiv b\pmod{\frac{n}{d}},$ kjer $d=(c,n)$
+\end{enumerate}
+\end{trd}
+
+\begin{proof}
+\begin{enumerate}
+\item Po predpostavki velja $a=b+kn$ in $n=d\cdot l$ za neka $k,l\in \mathbb{Z}$. Sledi $a=b+kld$, kar je ekvivalentno želenemu rezultatu, $a\equiv b \pmod d$.
+\item Po predpostavki za vsak $i=1,2,\ldots k$ velja $n_{i} \mid a-b$. Ker so si števila $n_{i}$ paroma tuja, sledi, da tudi njihov produkt deli razliko $a-b$, $\prod_{i=1}^{k} n_{i}\mid a-b$.
+\item Po predpostavki velja $ac=bc+kn$ za neki $k\in \mathbb{Z}$. Ker je $d$ največji skupni delitelj števil $c$ in $n$, ju lahko zapišemo kot $c=c_{1}d$ in $n=n_{1}d$. Če to vstavimo v prejšnji izraz, dobimo
+\begin{align*}
+ac_{1}d&=bc_{1}d+kn_{1}d \ \ \ /:d \\
+ac_{1}&= bc_{1} + kn_{1}
+\end{align*}
+Velja torej $(a-b)c_{1}=kn_{1}$, od koder sledi $c_{1}\mid kn_{1}$. Vemo pa, da $(c_{1},n_{1})=1$, saj je bil $d$ največji skupni delitelj števil $c$ in $n$. Lahko torej sklepamo, da $c_{1}\mid k$ oz. $k=lc_{1}$ za neki $l\in \mathbb{Z}$. Od tod sledi
+\begin{align*}
+(a-b)c_{1}&=lc_{1}n_{1} \ \ \ /:c_{1} \\
+a-b&=ln_{1}
+\end{align*}
+Vidimo, da $n_{1}\mid a-b$, kar je po definiciji ekvivalentno želenemu rezultatu, $a\equiv b \pmod{n_{1}},\  n_{1}=\frac{n}{d}$.
+\end{enumerate}
+\end{proof}
+
+\begin{trd}
+Naj bo $f(x)=\sum_{i=0}^{k} c_{i}x^{i},\ c_{i}\in \mathbb{Z}$. Če za $a,b \in \mathbb{Z}$ velja $a\equiv b \pmod n$, potem je $f(a)\equiv f(b) \pmod n$.
+\end{trd}
+
+\begin{proof}
+Po predpostavki velja $a\equiv b \pmod n$. Po 3. točki trditve \ref{osnovne} vemo, da zato velja tudi $a^{i}\equiv b^{i} \pmod n$, od koder sledi $c_{i}a^{i}\equiv c_{i}b^{i} \pmod n$. Če te člene sedaj seštejemo, dobimo
+$$\sum_{i=0}^{k} c_{i}a^{i} \equiv \sum_{i=0}^{k} c_{i}b^{i} \pmod n,$$
+kar smo želeli pokazati.
+\end{proof}
+
+\subsection{Kriteriji za deljivost}
+
+En izmed primerov uporabe kongruenc je določanje kriterijev za deljivost z določenimi števili. Navedli in dokazali bomo kriterije za deljivost s števili $3$, $9$, $11$ in $7$, na enak način pa bi lahko izpelajli kriterije za deljivost s poljubnimi naravnimi števili.
+
+\begin{trd}
+Naj bo $n=\sum_{i=0}^{k} c_{i}10^{i}$ desetiški zapis števila $n\in \mathbb{N}$. Označimo s $s$, $t$ in $w$ sledeče izraze:
+\begin{align*}
+s&=\sum_{i=0}^{k}c_{i} \\
+t&=\sum_{i=0}^{k}(-1)^{i}c_{i} \\
+w&=c_{0}+3c_{1}+2c_{2}-c_{3}-3c_{4}-2c_{5}+c_{6}+3c_{7}+\ldots
+\end{align*}
+Potem velja:
+\begin{itemize}
+\item[$(i)$] $3\mid n \iff 3\mid s$ (in $n\equiv s \pmod 3$)
+\item[$(ii)$] $9\mid n \iff 9\mid s$ (in $n\equiv s \pmod 9$)
+\item[$(iii)$] $11\mid n \iff 11\mid t$ (in $n\equiv t \pmod{11}$)
+\item[$(iv)$] $7\mid n \iff 7\mid w$ (in $n\equiv w \pmod 7$)
+\end{itemize}
+\end{trd}
+
+\begin{proof}
+\begin{itemize}
+\item[$(i)$] $10\equiv 1 \pmod 3\implies 10^{i}\equiv 1 \pmod 3 $
+$$ n=\sum_{i=0}^{k}c_{i}10^{i} \equiv \sum_{i=0}^{k}c_{i}1 =s\pmod 3 \ \ \ \checkmark$$
+\item[$(ii)$] $10\equiv 1 \pmod 9 \implies 10^{i}\equiv 1\pmod 9$
+$$ n=\sum_{i=0}^{k}c_{i}10^{i} \equiv \sum_{i=0}^{k}c_{i}1 =s\pmod 9 \ \ \ \checkmark$$
+\item[$(iii)$] $10=-1\pmod{11} \implies 10^{i}\equiv (-1)^{i} \pmod{11}$
+$$ n=\sum_{i=0}^{k}c_{i}10^{i} \equiv \sum_{i=0}^{k}(-1)^{i}c_{i} =t\pmod{11} \ \ \ \checkmark$$
+\item[$(iv)$] $10\equiv 3 \pmod 7,\ 10^{2}\equiv 9\equiv 2\pmod 7,\ 10^{3}=10\cdot 10^{2}\equiv 6\equiv -1 \pmod7$\\
+$10^{4}=10^{2}\cdot10^{2}\equiv -3\pmod7,\ 10^{5}=10^{2}\cdot 10^{3}\equiv -2 \pmod 7,\ \ldots$\\
+Opazimo vzorec, pa katerem se nadaljuje zaporedje. Zapišemo lahko torej
+$$ n=c_{0}+c_{1}10+c_{2}10^{2}+c_{3}10^{3}+c_{4}10^{4}+c_{5}10^{5}+c_{6}10^{6}+c_{7}10^{7}+\ldots\equiv$$
+$$ \equiv c_{0}+3c_{1}+2c_{2}-c_{3}-3c_{4}-2c_{5}+c_{6}+3c_{7}+\ldots = w\pmod 7 \ \ \ \checkmark$$
+\end{itemize}
+\end{proof}
+
+\subsection{Reducirani sistem ostankov}
+
+\begin{defi}
+\textbf{Reducirani sistem ostankov} po modulu $n\in \mathbb{N}$ tvorijo predstavniki tistih kongruenčnih razredov, ki so si tuji z modulom $n$. \textbf{Standardni reducirani sistem ostankov} označimo z $\mathbb{Z}_{n}^{\times}\subseteq \mathbb{Z}_{n}$ in ga sestavljajo števila med $1$ in $n$, ki so tuja $n$.
+
+\noindent
+Moč množice $\mathbb{Z}_{n}^{\times}$ označimo s $\phi(n)=|\mathbb{Z}_{n}^{\times}|$. Funkcija $\phi$ se imenuje \textbf{Eulerjeva funkcija}.
+\end{defi}
+
+\begin{prim}
+Če je $p\in \mathbb{P}$, je $\mathbb{Z}_{p}^{\times}=\{1,2,\ldots,p-1\}$ in $\phi(p)=p-1$.
+\end{prim}
+
+\begin{trd}
+\label{rsistem}
+\begin{enumerate}
+\item Naj bo $\{r_{1},r_{2},\ldots,r_{n}\}$ neki popolni sistem ostankov $\pmod n$. Če velja $a,b\in \mathbb{Z}$ in $(a,n)=1$, potem je tudi $\{ar_{1}+b,ar_{2}+b,\ldots,ar_{n}+b\}$ popolni sistem ostankov $\pmod n$.
+\item Naj bo $\{q_{1},q_{2},\ldots,q_{\phi(n)}\}$ neki reducirani sistem ostankov $\pmod n$. Če je $a\in \mathbb{Z}$ in $(a,n)=1$, potem je tudi $\{aq_{1},aq_{2},\ldots,aq_{\phi(n)}\}$ reducirani sistem ostankov $\pmod n$.
+\end{enumerate}
+\end{trd}
+
+\begin{proof}
+\begin{enumerate}
+\item Zadošča pokazati, da nobeni dve števili v drugi množici nista kongruentni po modulu $n$.\\
+Predpostavimo $ar_{i}+b\equiv ar_{j}+b \pmod n$ za neka $i,j =1,2,\ldots,n$. Sledi  $ar_{i}\equiv ar_{j} \pmod n$. Ker $(a,n)=1$, lahko iz tega sklepamo, da $r_{i} \equiv r_{j} \pmod n$. Ker sta $r_{i}$ in $r_{j}$ elementa popolnega sistema ostankov, morata zato biti kar enaka. Velja torej tudi $i=j$, kar pomeni, da je vsako število $ar_{i}+b$ kongruentno po modulu $n$ le samemu sebi.
+\item Iz 1. točke izreka že vemo, da so si elementi $q_{i}$ paroma nekongruentni. Razmisliti še moramo, da so si res vsi tuji z $n$. Število $q_{i}$ si je tuje z $n$, saj je element reduciranega sistema ostankov, $a$ pa si je tuj z $n$ po predpostavki. Sledi, da si je tudi produkt $aq_{i}$ tuj z $n$.
+\end{enumerate}
+\end{proof}
+
+\subsection{Rešljivost linearih kongruenc}
+
+\begin{izr}[o rešljivosti linearnih kongruenc]
+Za linearno kongruenco $ax\equiv b \pmod n$ velja:
+\begin{enumerate}
+\item če je $(a,n)=1$, ima linearna kongruenca natanko eno rešitev po modulu $n$,
+\item če je $d=(a,n)>1$ in $d\nmid b$, linearna kongruenca nima rešitev,
+\item če je $d=(a,n)>1$ in $d\mid b$, ima linearna kongruenca $d$ nekongruentnih rešitev po modulu $n$. Te rešitve so oblike
+$$x_{0}+k\frac{n}{d} \pmod n,\ k=0,1,2,\ldots,d-1,$$
+kjer je $x_{0}$ rešitev kongruence $\frac{a}{d}x\equiv \frac{b}{d} \pmod{\frac{n}{d}}$.
+\end{enumerate}
+\end{izr}
+
+\begin{posl}
+$\mathbb{Z}_{n}^{\times}$ je grupa za množenje, saj ima enačba $ax\equiv 1 \pmod n$ natanko eno rešitev za $a$, ki je tuj $n$.
+\end{posl}
+
+\begin{proof}
+\begin{enumerate}
+\item Velja $(a,n)=1$, zato, ko $x$ preteče vse kongruenčne razrede $\pmod n$ natanko enkrat, tudi element $ax$ preteče vse kongruenčne razrede natanko enkrat.
+\item Po predpostavki velja $d=(a,n)>1$, zato lahko $a$ in $n$ zapišemo kot $a=a_{1}d$ in $n=n_{1}d$. Denimo, da obstaja rešitev $ax\equiv b\pmod n$ dane linearne kongruence. Velja torej $a=b + kn$ za neki $k\in \mathbb{Z}$. Sledi sklep
+$$a_{1}dx=b+kn_{1}d \implies d(a_{1}x-kn_{1})=b\implies d\mid b,$$
+kar pa je v protislovju z drugo predpostavko.
+\item Po predpostavki velja $d\mid b$, zato lahko izraz $ax\equiv b \pmod n$ delimo z $d$ in dobimo $\frac{a}{d}x\equiv \frac{b}{d} \pmod{\frac{n}{d}}$, pri čemer velja $(\frac{a}{d}, \frac{b}{d})=1$. Po 1. točki izreka sledi, da obstaja natanko ena rešitev $x_{0}$ te kongruence po modulu $\frac{n}{d}$. Velja torej $\frac{a}{d}x_{0}= \frac{b}{d} +k\frac{n}{d}$ za neki $k\in \mathbb{Z}$, od koder očitno sledi, da je $x_{0}$ rešitev dane kongruence tudi po modulu $n$. Vidimo pa, da kongruenco po modulu $\frac{n}{d}$ reši tudi $x_{k}=x_{0}+k\frac{n}{d}$ in zato reši tudi kongruenco po modulu $n$. Naj omenim, da je rešitev po modulu ${\frac{n}{d}}$ res ena sama, saj so si vsi $x_{k}$ kongruentni modulo $\frac{n}{d}$, vendar ne modulo $n$. Če $x_{k}$ zapišemo nekoliko drugače, $x_{k}=x_{0}+n\frac{k}{d}$, je lažje opaziti, da je število do kongruence po modulu $n$ različnih $x_{k}$ ravno $d$, in sicer za $k\in \{0,1,2,\ldots,d-1\}$ (kjer pri $k=0$ dobimo kar $x_{0}$).
+\end{enumerate}
+\end{proof}
+
+\begin{opom}
+Isti rezultat lahko izpeljemo iz izreka o rešljivosti linearnih diofantskih enačb.
+\end{opom}
+
+\begin{opom}
+Presenetljivo ima linearna enačba $ax\equiv b\pmod n$ lahko več rešitev. To se nad $\mathbb{R}$ ali $\mathbb{C}$ ne zgodi. Razlog je v tem, da ima $\mathbb{Z}_{n}$ v splošnem delitelje niča.
+$$\frac{n}{d},\ d\in \mathbb{Z}_{n}\setminus\{0\},\ \frac{n}{d}\cdot d = n \equiv 0 \pmod n$$
+\end{opom}
+
+\subsection{Sistemi linearnih kongruenc}
+ 
+Iščemo $x\in \mathbb{Z}$, ki reši sistem:
+\begin{align*}
+a_{1}x&\equiv b_{1} \pmod{n_{1}} \\
+a_{2}x&\equiv b_{2} \pmod{n_{2}} \\
+&\vdots \\
+a_{k}x&\equiv b_{k} \pmod{n_{k}}
+\end{align*} 
+
+Potrebni pogoj za rešljivost celotnega sistema je seveda ta, da je rešljiva vsaka posamezna kongruenca v sistemu. Iz izreka o rešljivosti linearnih kongruenc vemo, da ima linearna kongruenca lahko eno ali več rešitev, lahko pa ni rešljiva. Denimo, da so rešljive vse kongruence v sistemu in izberimo po eno rešitev za vsako.
+$$
+x\equiv c_{1} \pmod{n_{1}},\  x\equiv c_{1} \pmod{n_{1}},\ \cdots,\  x\equiv c_{1} \pmod{n_{1}}
+$$
+Posebej si bomo ogledali primer sistema dveh linearnih kongruenc:
+\begin{align*}
+x&\equiv c_{1} \pmod{n_{1}} \\
+x&\equiv c_{2} \pmod{n_{2}} \\
+\end{align*}
+
+Problem reševanja linearnih kongruenc bomo prevedli na problem reševanja diofantskih enačb. Iz prve enačbe sistema tako dobimo diofantsko enačbo $x=c_{1}+kn_{1},\ k\in \mathbb{Z}$, ki jo vstavimo v drugo kongruenco:
+\begin{gather*}
+c_{1} + kn_{1} \equiv c_{2} \pmod{n_{2}} \\
+kn_{1}\equiv c_{2}-c_{1} \pmod{n_{2}}
+\end{gather*}
+
+Izrek o rešljivosti linearnih kongruenc nam o zgornji kongruenci pove naslednje:
+\begin{itemize}
+\item če je $(n_{1},n_{2})=1$, ima kongruenca natanko eno rešitev
+\item če je $(n_{1},n_{2})=d>1$, je kongruenca rešljiva natanko tedaj, ko velja $c_{1}\equiv c_{2} \pmod d$ in tedaj ima natanko $d$ rešitev
+\end{itemize}
+
+Lahko torej sklepamo, da je rešitev, če obstaja, določena modulo $n_{1}\cdot n_{2}$ (do večkratnikov rešitev). ???
+
+\begin{opom}
+Za sistem z več kongruencami lahko zaporedoma uporabljamo zgornjo metodo na dveh.
+\end{opom}
+
+\begin{prim}
+Nace pove Mojci, da ima manj kot $100$ bonbonov. Ker je Mojca sladkosneda, je sprva razočarana, vendar jo čez čas le začne begati, koliko bonbonov ima Nace. Ko ga vpraša, ji Nace enigmatično odvrne, da mu ostane eden, če jih zloži v kupčke po $4$, če jih zloži v kupčke po $6$, mu ostanejo trije, če jih zloži v kupčke po $7$, pa mu jih ostane pet. Ali lahko Mojca ugotovi, koliko bonbonov ima Nace? 
+\\
+\\
+Dane podatke najprej zapišemo s kongruencami in dobimo sledeč sistem:
+\begin{gather*}
+n\equiv 1 \pmod 4 \\
+n\equiv 3 \pmod 6 \\
+n\equiv 5 \pmod 7
+\end{gather*}
+Iz prve kongruence dobimo diofantsko enačbo $n=1+4k$, ki jo vstavimo v drugo kongruenco. Sledi
+\begin{align*}
+1+4k&\equiv 3 \pmod 6 \\
+4k&\equiv 2 \pmod 3 \ \ \ /:2 \\
+2k&\equiv 1 \pmod 3 \ \ \  /\cdot 2 \tag{$\ast$}\label{inverz}\\
+4k&\equiv k\equiv 2 \pmod 3
+\end{align*}
+V vrstici \eqref{inverz} smo se želeli znebiti koeficienta $2$ pred $k$. Pri tem se je dobro zavedati, da smo zato kongruenco pomnožili z inverzom števila $2$ v kolobarju $\mathbb{Z}_{3}$, ki je kar število $2$ samo. \\
+Iz dobljene kongruence sledi $k=2+3l$ za neki $l\in \mathbb{Z}$. Velja torej $ n=1+4k=9+12l$, kar je po definiciji ekvivalentno izrazu $n\equiv9 \pmod{12}$, ki je rešitev prvih dveh kongruenc sistema. Zdi se, da ena rešitev manjka, saj je največji skupni delitelj modulov $(4,6)=2$ in bi zato morali imeti dve rešitvi, vendar to bi držalo za rešitve po modulu $24$. Tako bi dobili rešitvi $n_{1}\equiv 9 \pmod{24}$ in $n_{2}\equiv 21 \pmod{24}$, ki pa sta po modulu $12$ kongruentni in sta hkrati zajeti v izrazu $n\equiv9 \pmod{12}$. Vidimo torej, da gre le za drugačen, ekvivalentni zapis rešitve.
+Ta rezultat vstavimo v tretjo kongruenco in dobimo:
+\begin{gather*}
+9+12l\equiv 5 \pmod 7 \\
+12l\equiv -4 \equiv 3 \pmod 7 
+\end{gather*}
+
+Da ilustriramo raznolikost reševanja problemov te narave in pokažemo nekaj izmed pristopov, se bomo do končnega rezultata prikopali na dva različna načina.
+\begin{enumerate}
+\item
+\begin{align*}
+12l&\equiv 3 \pmod 7 \ \ \ /:3 &&\text{delimo}\\
+4l&\equiv 1 \pmod 7 \ \ \ /\cdot 2 &&\text{množimo z inverzom} \\
+l&\equiv 2 \pmod 7 
+\end{align*}
+\item
+\begin{align*}
+12l&\equiv 3 \pmod 7 &&7l\equiv 0 \pmod 7 \\
+5l&\equiv 3 \pmod 7 \ \ \ /\cdot (-1) &&\text{množimo}\\
+-5l&\equiv -3 \pmod 7 &&-5l\equiv 2l,\  -3\equiv 4 \pmod 7\\
+2l&\equiv 4 \pmod 7 \ \ \ /:2 &&\text{delimo}\\
+l&\equiv 2 \pmod 7
+\end{align*}
+\end{enumerate}
+ 
+Po obeh poteh smo prišli do rezultata $l=2+7m$. Končni rezultat je torej
+$$ n=9+12(2+7m)=33+84m,\ m\in \mathbb{Z}.$$
+Rešitev sistema je kongruenca $n\equiv 33 \pmod{84}$, ki nam poda kongruenčni razred, v katerem se mora nahajati $n$, da bo rešil dani sistem linearnih kongruenc (tudi tukaj je na mestu prejšnji komentar o eni sami rešitvi namesto dveh). Nas seveda zanimajo le nekateri predstavniki tega ekvivalenčnega razreda, in sicer tisti, ki ležijo med $1$ in $99$. V tem primeru je tak le eden, število $33$. Nace ima torej 33 bonbonov, odgovor na naše vprašanje pa se glasi, da Mojca lahko ugotovi, koliko bonbonov ima Nace (če je le pridno poslušala pri predavanjih ETŠ).
+\end{prim}
+
+V primeru, ko so si moduli paroma tuji, pa vedno obstaja natanko ena rešitev sistema $x\equiv c_{i}$ za $i=1,2,\dots,k$ po modulu $n=\prod_{i=1}^{k}n_{i}$. To nam pove naslednji izrek:
+
+\begin{izr}[kitajski izrek o ostankih]
+Sistem linearnih kongruenc $x\equiv c_{i} \pmod{n_{i}}$ za $i=1,2,\dots,k$, kjer so si moduli $n_{i}$ paroma tuji, ima natanko eno rešitev po modulu $N:=\prod_{i=1}^{k}n_{i}$. Rešitev je podana s formulo
+$$ x\equiv \sum_{i=1}^{k}c_{i}N_{i}k_{i} \pmod N,$$
+kjer je $N_{i}=\frac{N}{n_{i}}$ in $N_{i}k_{i}\equiv 1 \pmod{n_{i}}$.
+\end{izr}
+
+\begin{proof}
+Naj si bodo naravna števila $n_{i},\ i=1,2,\dots,k$, paroma tuja. Razmislimo najprej, da ima sistem $x\equiv c_{i} \pmod{n_{i}}$ natanko eno rešitev. Oglejmo si podsistem kongruenc $x\equiv c_{1} \pmod{n_{1}}$ in $x\equiv c_{2} \pmod{n_{2}}$. Po predpostavki izreka sta si modula $n_{1}$ in $n_{2}$ tuja. Vemo torej, da ima ta podsistem natanko eno rešitev $d_{1}$ po modulu $n_{1}\cdot n_{2}$. Sedaj si oglejmo sistem kongruenc  $x\equiv d_{1} \pmod{n_{1} n_{2}}$ in $x\equiv c_{3} \pmod{n_{3}}$. Ker velja $(n_{1},n_{3})=1$ in $(n_{2},n_{3})=1$, velja tudi $(n_{1}n_{2},n_{3})=1$. Spet lahko sklepamo, da ima sistem teh dveh kongruenc natanko eno rešitev $d_{2}$ po modulu $n_{1}\cdot n_{2}\cdot n_{3}$. Analogno poiščemo rešitev sistema kongruenc $x\equiv d_{2} \pmod{n_{1} n_{2} n_{3}}$ in $x\equiv c_{4} \pmod{n_4}$, ki je spet natanko ena. Postopek ponavljamo, dokler ne pridemo do rešitve $d_{k-1}$ po modulu $N:=\prod_{i=1}^{k}n_{i}$ celotnega sistema, za katero vemo, da je natanko ena. Reševanje celotnega sistema $i$ kongruenc smo tako le prevedli na reševanje sistema dveh kongruenc, kot smo to naredili v zgornjem primeru za sistem treh kongruenc.
+
+Preostane še pokazati, da velja $d_{k-1}\equiv \sum_{i=1}^{k}c_{i}N_{i}k_{i} \pmod N$. Dovolj je kar preveriti, da je $x\equiv \sum_{i=1}^{k}c_{i}N_{i}k_{i} \pmod N$ res rešitev našega sistema $x\equiv c_{i} \pmod{n_{i}}$. Po prvi točki trditve \ref{osnovne} sledi, da velja $x\equiv \sum_{i=1}^{k}c_{i}N_{i}k_{i} \pmod{n_{i}}$ za vse $i$, saj $n_{i}$ deli $N$ za vse $i$. Po predpostavki izreka dodatno velja $N_{i}=\frac{N}{n_{i}}$ in $N_{i}k_{i}\equiv 1 \pmod{n_{i}}$. Če sumand $c_{i}N_{i}k_{i}$ zapišemo kot $c_{i}\frac{N}{n_{i}}k_{i}$, je lažje opaziti, da velja
+
+\[
+ c_{i}\frac{N}{n_{i}}k_{i} \pmod{n_{j}}\equiv
+\begin{cases}
+c_{i} &;\ i=j \\
+0 &;\ i\neq j
+\end{cases}
+\]
+
+Od tod sledi, da za vsak $i\in \{1,2,\dots,k\}$ res velja
+$$
+x\equiv \sum_{i=1}^{k}c_{i}N_{i}k_{i} \equiv c_{i} \pmod{n_{i}}.
+$$
+\end{proof}
+
+\subsection{Eulerjeva funkcija $\phi$}
+ 
+Eulerjevo funkcijo $\phi$ smo omenili že pri definiciji reduciranega sistema ostankov. Formalno je definirana kot
+\[
+\phi(n):=
+\begin{cases}
+1 &;\ n=1 \\
+|\mathbb{Z}_{n}^{\times}| &;\ n\geq 2
+\end{cases}
+\]
+
+\begin{lema}[Gau{\ss}]
+Za vsak $n \in \mathbb{N}$ velja $$ \sum_{d\mid n} \phi(d) = n.$$
+\end{lema}
+
+\begin{proof}
+Za vsak $d,\ d\mid n$, definirajmo množico 
+$$A_{d}:=\{k\in \mathbb{Z}_{n} \mid (k,n)=d\}.$$ 
+Pri tem kot elemente $\mathbb{Z}_{n}$ razumemo standardne prestavnike kongruenčnih razredov. Za vsak element $k$ tako definirane množice $A_{d}$ velja $k=k_{1}d$ za neki $k_{1}$ in posledično $(k_{1},\frac{n}{d})=1$. Števila $k_{1}$ so ravno vsa števila, tuja modulu $\frac{n}{d}$, zato tvorijo reducirani sistem ostankov $\mathbb{Z}_{\frac{n}{d}}^{\times}$. Število različnih $k_{1}$ je enako številu različnih $k$, se pravi moči množice $A_{d}$, torej velja
+$$|A_{d}|=\phi(\frac{n}{d}).$$
+Ker so množice $A_{d}$ paroma disjunktne, tvorijo razbitje množice $\mathbb{Z}_{n}$. Od tod sledi, da je moč množice $\mathbb{Z}_{n}$ kar enaka vsoti moči vseh množic $A_{d}$:
+$$n=|\mathbb{Z}_{n}|= \sum_{d\mid n} A_{d} = \sum_{d\mid n}\phi(\frac{n}{d})=\sum_{d\mid n} \phi(d)$$
+\end{proof}
+
+\begin{posl}
+\begin{enumerate}
+\item Funkcija $\phi$ je multiplikativna.
+\item $\phi(n)=\sum_{d\mid n}\mu (d)\frac{n}{d} \implies \phi(p^{\alpha})=p^{\alpha}(1-\frac{1}{p})$
+\item Če je $n=\prod_{i=1}^{k}p_{i}^{s_{i}}$, je $\phi(n)=n\prod_{i=1}^{k}(1-\frac{1}{p_{i}})$.
+\end{enumerate}
+\end{posl}
+
+\begin{proof}
+\begin{enumerate}
+\item Sledi iz Gau{\ss}ove leme, saj je $g(n)=n$ multiplikativna.
+\item Sledi iz Gau{\ss}ove leme z uporabo M{\"o}biusove inverzne formule:
+$$ \phi(p^{\alpha})=\sum_{d\mid p^{\alpha}}\mu (d)\frac{p^{\alpha}}{d} = \mu (1)\frac{p^{\alpha}}{1} + \mu (p)\frac{p^{\alpha}}{p} = p^{\alpha}(1-\frac{1}{p}), $$
+pri čemer smo upoštevali $\mu (1)=1$ in $\mu (p)=-1$.
+\item ???
+\end{enumerate}
+\end{proof}
+
+Množica $\mathbb{Z}_{n}$ je grupa za seštevanje, množica $\mathbb{Z}_{n}^{\times}$ pa je grupa za množenje. Inverz v grupi $\mathbb{Z}_{n}^{\times}$ lahko izračunamo s pomočjo Eulerjevega izreka:
+
+\begin{izr}[Euler]
+Naj bo $n\in \mathbb{N}$ in $a\in \mathbb{Z}$. Če sta si števili $a$ in $n$ tuji, $(a,n)=1$, velja
+$$a^{\phi(n)}\equiv 1 \pmod n.$$
+\end{izr}
+
+\begin{proof}
+Naj bo $\{q_{1},q_{2},\dots,q_{\phi(n)}\}$ reducirani sistem ostankov po modulu $n$. Po predpostavki velja $(a,n)=1$, zato po drugi točki trditve \ref{rsistem} sledi, da je tudi $\{aq_{1},aq_{2},\dots,aq_{\phi(n)}\}$ reducirani sistem ostankov po modulu $n$. Ker sta obe množici reducirana sistema ostankov po modulu $n$, vsebujeta do kongruence po modulu $n$ enake elemente. Izjava $q_{i}\equiv aq_{i} \pmod n$ nujno ne velja, gotovo pa velja
+$$\prod_{i=1}^{\phi(n)}q_{i} \equiv \prod_{i=1}^{\phi(n)}aq_{i} \equiv a^{\phi(n)}\prod_{i=1}^{\phi(n)}q_{i} \pmod n.$$
+V zgornji enačbi lahko pokrajšamo $\prod_{i=1}^{\phi(n)}q_{i}$ in dobimo rezultat
+$$a^{\phi(n)}\equiv 1 \pmod n.$$
+\end{proof}
+
+\begin{posl}
+Naj bo $p$ praštevilo in $a\in \mathbb{Z}$. Če $p$ ne deli $a$, $p\nmid a$, velja
+$$a^{p-1}\equiv 1 \pmod p.$$
+Ta izrek se imenuje \textit{mali Fermatov izrek}.
+\end{posl}
+
+\begin{prim}
+S pomočjo Eulerjevega izreka bomo rešili kongruenco
+$$x^{9}\equiv 5 \pmod{33}.$$
+Za $n=33=3\cdot 11$ zaradi multiplikativnost $\phi$ velja $\phi(n)=\phi(3)\cdot\phi(11)$. Ker sta $3$ in $11$ praštevili, velja $\phi(3)=2$ in $\phi(11)=10$, od koder sledi $\phi(n)=20$. Po Eulerjevem izreku torej velja $$a^{20}\equiv 1\pmod{33}$$ za neki $a$, ki je tuj $33$. Ker je $(5,33)=1$ in je $x^{9}$ kongruenten $5$ po modulu 33, sta si tudi števili $x$ in $33$ tuji, $(x,33)=1$. S pomočjo Eulerjevega izreka se bomo poskusili znebiti potence nad $x$. Velja $(9,20)=1$, zato obstajata taki števili $u,v\in\mathbb{Z}$, da velja $9u+20v=1$ oz. $9u=1-20v$. Opazimo, da je tak par celih števil npr. par $u=9$ in $v=-4$, saj $9\cdot 9=81=1-(-4)\cdot 20$. Sledi
+\begin{align*}
+x^{9}&\equiv 5\pmod{33} \ \ \ / ^{9} \\
+x^{81}&\equiv 5^{9} \pmod{33} \\
+x^{81}&= x^{1+4\cdot 20} = x\cdot(x^{20})^{4}\equiv x\cdot 1^{4} \equiv x\pmod{33}
+\end{align*}
+Vemo torej, da $x\equiv 5^{9} \pmod{33}$. Potence te vrste se da pogosto precej poenostaviti z redukcijo po modulu. V tem primeru bi izraz najbrž hitreje izračunali kar "na roke"\ kot $5\cdot 625^{2}$, vendar bomo način z redukcijo po modulu iz pedagoških razlogov vseeno demonstrirali.
+\begin{align*}
+5^{2}&=25\equiv -8\pmod{33} \\
+5^{3}&\equiv -8\cdot 5 = -40\equiv -7\pmod{33} \\
+5^{6}&=(5^{3})^{2}\equiv 49\equiv 16\pmod{33} \\
+5^{9}&=5^{6}\cdot 5^{3}\equiv -7\cdot 16 =-112\equiv -13\equiv 20\pmod{33}
+\end{align*}
+Rešitev kongruence je torej $x\equiv 20\pmod{33}$.
+\end{prim}
+
+\subsection{Polinomske kongruence}
+
+Naj bo $f$ polinom z celimi koeficienti, ki je stopnje $s$ modulo $n\in \mathbb{N}$. Po definiciji to pomeni, da je koeficient pri $x^{s}$ modulo $n$ različen od $0$, koeficienti pri vsej višjih členih pa so kongruentni $0$ modulo $n$. Iščemo rešitev kongruence
+$$f(x)\equiv 0\pmod n.$$
+Iz prve in druge točke trditve \ref{osnovne} in kitajskega izreka o ostankih, lahko o rešitvah take kongruence sklepamo naslednje:
+\begin{itemize}
+\item Če je $n=\prod_{i=1}^{k}n_{i}$, kjer so $n_{i}$ tuja si števila, nam $x$, za katerega velja $f(x)\equiv 0 \pmod n$, da rešitve za kongruenc $f(x)\equiv 0 \pmod{n_{i}}$ za $i=1,2,\dots,k$.
+\item Če so $a_{i}$ rešitve kongruenc $f(x)\equiv 0 \pmod{n_{i}}$ za $i=1,2,\dots,k$, potem ima sistem kongruenc $x\equiv a_{i}\pmod{n_{i}}$ natanko eno rešitev $x$ modulo $n$ in ta reši kongruenco $f(x)\equiv 0\mod n$.
+\end{itemize}
+
+Sklepamo, da je za reševanje kongruence $f(x)\equiv 0\pmod n$ torej dovolj poznati rešitve kongruenc $f(x)\equiv 0\pmod{p_{i}^{r_{i}}}$, kjer je $n=\prod_{i=1}^{k}p_{i}^{r_{i}}$ enolična faktorizacija. Pri tem je prvi korak iskanje rešitev modulo $p$, $p\in \mathbb{P}$. 
+
+Za običajne polinome nad $\mathbb{Z}$ velja, da imajo lahko največ toliko ničel, kolikor je stopnja polinoma. Ker nas zanima, koliko rešitev lahko pričakujemo za našo polinomsko kongruenco, se naravno pojavi vprašanje, ali kaj podobnega velja tudi za polinome nad $\mathbb{Z}_{n}$. Oglejmo si naslednji primer:
+
+\begin{prim}
+Poišči rešitve polinomske kongruence
+$$x^{2}\equiv 1\pmod{15}.$$
+Že v $\mathbb{Z}$ za dano kongruenco najdemo dve rešitvi, in sicer $x_{1}=1$ ter $x_{2}=-1$. Ni težko ugotoviti, da pa sta rešitvi tudi $x_{3}=4$ ter $x_{4}=-4$. Rutinsko lahko preverimo, da so to res vse rešitve. Tako smo dobili štiri rešitve za enačbo druge stopnje. Da bi ta rezultat lažje razumeli, zapišimo našo kongruenco nekoliko drugače:
+$$x^{2}\equiv 1\pmod{15} \iff (x-1)(x+1)\equiv 0 \pmod{15}$$
+Tako bi se reševanja običajne polinomske enačbe formalno lotili tudi v $\mathbb{Z}$. Ker mora biti vsaj eden izmed faktorjev enak $0$, bi dobili rešitvi $x_{1}=1$ ter $x_{2}=-1$. Ta sklep pa velja le, ker kolobar $\mathbb{Z}$ nima deliteljev niča, kar v $\mathbb{Z}_{n}$ v splošnem ne velja. Zato dobimo tu dve dodatni rešitvi, saj sta v kolobarju $\mathbb{Z}_{15}$ štvili $3$ in $5$ delitelja niča.
+\end{prim}
+
+O številu rešitev polinomskih kongruenc nam več pove naslednji izrek:
+
+\begin{izr}[Lagrange]
+Naj bo $f$ polinom s koeficienti v $\mathbb{Z}$ in $p\in \mathbb{P}$. Če ima polinom $f$ stopnjo $s$ modulo $p$, potem ima kongruenca $f(x)\equiv 0\pmod p$ največ $s$ rešitev modulo $p$.
+\end{izr}
+
+\begin{proof}
+Lagrangeev izrek bomo dokazali z indukcijo po $s$.
+\begin{itemize}
+\item[$s=1:$] $f(x)\equiv a_{1}x+a_{0} \pmod p$. Ker je stopnja $s=1$, velja $a_{1}\not\equiv 0$. Sledi $(a_{1},p)=1$, zato ima kongruenca po prejšnjih sklepih res natanko eno rešitev. \checkmark
+\item[$s\rightarrow s+1:$] $f(x)\equiv a_{s+1}x^{s+1}+\dots + a_{0} \pmod p$. Enako kot zgoraj velja $a_{s+1}\not\equiv 0 \pmod p$. Denimo, da ima $f$ več kot $s+1$ ničel $c_{i}$ modulo $p$, $i=1,2,\dots ,s+2$. $$Ničle različne???????$$
+
+\end{itemize}
+\end{proof}
+
+\section{Kriptografija}
+V tem razdelku bomo spoznali, kako lahko uporabimo teorijo števil za skrivanje sporočil. Naš namen bo sporočilo spremeniti tako, da ga nihče brez dodatnih iniformacij ne bo znal prebrati.
+
+\subsection{Afina šifra}
+Ideja je, da izberemo novo abecedo in preslikavo iz prvotne abecede v novo. To bomo naredili tako, da bomo vzeli neko permutacijo znakov. Če črke slovenske abecede oštevilčimo, dobimo bijektivno korespondenco med črkami abecede (teh je 25) in pa elementi grupe $\mathbb{Z}_{25}$. Tako moramo izbrati samo še preslikavo $f:\mathbb{Z}_{25} \to \mathbb{Z}_{25}$. Ta preslikava mora biti bijektivna, saj v nasprotnem primeru besedila ne bi mogli dešifrirati. Najbolj preprost primer take preslikave je kar afina preslikava 
+$$
+f(x)\equiv ax+b\pmod{25},
+$$
+kjer $(a,5)=1$. Njena inverzna preslikava $f^{-1}$ je podana s predpisom
+$$
+f^{-1}(y)\equiv a^{-1}(y-b) \pmod{25}.
+$$
+
+\begin{prim}
+Cezarjeva šifra je bila pomik abecede za tri znake, $x\mapsto x+3$.
+\end{prim}
+
+Ta metoda ima seveda nekaj pomanjkljivosti. Ena je ta, da smo ohranili presledke med besedami in ločila, toda to z lahkoto odpravimo tako, da jih dodamo kot nove znake v našo abecedo. Glavna slabost te metode je pa ta, da lahko za daljša besedila ugotovimo šifro na podlagi zastopanosti posameznih črk, če le vemo, v katerem jeziku je osnovno besedilo.
+
+\begin{table}[!ht]
+\centering
+\caption{Zastopanost črk v slovenski abecedi}
+\label{zastopanost}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Črka} & \textbf{\%} & \textbf{Črka} & \textbf{\%} & \textbf{Črka} & \textbf{\%} & \textbf{Črka} & \textbf{\%} & \textbf{Črka} & \textbf{\%} \\ \hline
+\textit{E}    & 10,71\%            & \textit{L}    & 5,27\%             & \textit{V}    & 3,76\%             & \textit{Z}    & 2,10\%             & \textit{H}    & 1,05\%             \\ \hline
+\textit{A}    & 10,47\%            & \textit{S}    & 5,05\%             & \textit{K}    & 3,70\%             & \textit{B}    & 1,94\%             & \textit{C}    & 1,00\%             \\ \hline
+\textit{O}    & 9,08\%             & \textit{R}    & 5,01\%             & \textit{D}    & 3,39\%             & \textit{U}    & 1,88\%             & \textit{Š}    & 0,66\%             \\ \hline
+\textit{I}    & 9,04\%             & \textit{J}    & 4,67\%             & \textit{P}    & 3,37\%             & \textit{G}    & 1,64\%             & \textit{Ž}    & 0,65\%             \\ \hline
+\textit{N}    & 6,33\%             & \textit{T}    & 4,33\%             & \textit{M}    & 3,30\%             & \textit{Č}    & 1,48\%             & \textit{F}    & 0,11\%             \\ \hline
+\end{tabular}
+\end{table}
+
+Pojavi se vprašanje, za koliko znakov moramo poznati vrednost preslikave $f$, da lahko določimo koeficienta $a$ in $b$ ter s tem preslikavo $f$. Naj bodo $x_0$, $x_1$, $y_0$ in $y_1$ znani znaki ter $x_0\mapsto y_0$, $x_1\mapsto y_1$. Dobimo sistem dveh kongruenc z dvema neznankama.
+\begin{align*}
+f(x_0)\equiv ax_0 + b = y_0 \pmod{25} \\
+f(x_0)\equiv ax_1 + b = y_1 \pmod{25}
+\end{align*}
+Iz sistema z eliminacijo neznanke $b$ dobimo kongruenco $a(x_0-x_1)\equiv y_0-y_1\pmod{25}$. Ta enačba bo enolično rešljiva, če bo $x_0-x_1$ obrnljiv element v $\mathbb{Z}_{25}$. To bo res, ko bo $x_0-x_1$ tuj modulu $25$, torej $x_0\not\equiv x_1 \pmod5$. Če pa velja $x_0\equiv x_1 \pmod5$, dobimo za $a$ pet možnosti. Odgovor se torej glasi, da je odgovor odvisen od znakov, katerih vrednosti poznamo.
+
+\begin{opom}
+Metodo afinega šifriranja lahko izboljšamo z uporabo več preslikav.
+\end{opom}
+
+\subsection{Hillova šifra}
+Hillovo šifriranje vzame idejo afinega šifriranja in jo znatno nadgradi. Znakom (vzemimo tokrat črke slovenske abecede skupaj s presledkom) spet priredimo elemente grupe $\mathbb{Z}_{26}$. Nato sporočilo, ki ga želimo šifrirati, razdelimo na bloke po $n$ znakov, kjer je $n$ povsem poljubno naravno število. Besedilo smo torej razdelili na določeno število $n$-teric, ki jih bomo v nadaljevanju obravnavali kot vektorje. Namesto afine preslikave sedaj vzamemo naključno obrnljivo linearno preslikavo $A\in \mathbb{Z}_{26}^{n\times n}$ in jo uporabimo na vsakem vektorju posebej:
+$$
+A(c_1,\dots,c_n)\equiv (b_1,\dots,b_n)\pmod{26}.
+$$
+Ta metoda je veliko učinkovitejša od afinega šifriranja, saj je sedaj slika vsake črke odvisna tudi od ostalih črk v njeni $n$-terici, saj se s spremembo ene same črke (komponente vektorja) popolnoma spremeni tudi slika $n$-terice (vektorja), ki ji črka pripada. Za dešifriranje takega besedila moramo poznati preslikavo $A$.
+\begin{opom}
+Če izberemo $n=1$, je to kar metoda afinega šifriranja pri $b=0$.
+\end{opom}
+\begin{opom}
+Matrika $A\in \mathbb{Z}_{26}^{n\times n}$ je obrnljiva natanko tedaj, ko $detA\not\equiv 0 \pmod{26}$. Povsem poljubna matrika torej ni ustrezna. Število ustreznih matrik lahko povečamo z izbiro praštevilskega modula, kjer bodo ustrezne vse matrike z determinanto različno od $0$. V našem primeru lahko to dosežemo npr. tako, da dodamo piko, vejico in vprašaj ter tako dobimo modul $29$.
+\end{opom}
+
+Veliko boljše metode enkripcije so eksponentne šifre (Hellman, 1976, tvorec ideje o javnih ključih).
+
+\subsection{Ideja o javnih ključih}
+Pri tej metodi vsakemu znaku priredimo dvomestno numerično vrednost in jih kot pri Hillovem šifriranju združimo v bloke po $n$. Če vzamemo npr. $n=2$:
+\begin{align*}
+&A\mapsto 00, &   &B\mapsto 01, & &\cdots &  &Ž\mapsto 24, &     &\_\mapsto 25,
+\end{align*}
+dobimo bloke med $0000$ in $2525$. V naslednjem koraku vzamemo $2n$-mestno praštevilo, večje od vrednosti v zadnjem bloku. V našem primeru torej vzamemo neko $4$-mestno praštevilo $p>2525$. Nato izberemo še šifrirni ključ $e\in \mathbb{N},\ (e,p-1)=1,$ in sporočilo zašifriramo:
+$$
+y\equiv x^e\pmod{p}.
+$$
+Ker je $p$ praštevilo, je vsak $x\neq 0000$ številu $p$ tuj. Zdaj potrebujemo še inverzno preslikavo $x^e\mapsto x$. Pri tem si bomo pomagali z malim Fermatovim izrekom:
+$$
+x^{p-1}\equiv 1\pmod p.
+$$
+Ker smo $e$ izbrali tako, da $(e,p-1)=1$, obstajata $a,b\in \mathbb{Z}$, da velja \mbox{$ae = 1 + b(p-1)$}. Sledi:
+$$
+(x^e)^a=x\cdot x^{b(p-1)}\equiv x \pmod p
+$$
+Iskana inverzna preslikava je torej potenciranje na potenco $a$. Označimo $d:=a$ in $d$ imenujemo \textit{dešifrirni ključ}.
+
+Če vsi poznamo števili $e$ in $p$ lahko zašifriramo sporočilo in ga pošljemo po javnem kanalu, prebere ga pa lahko le tisti, ki pozna dešifrirni ključ $d$. Očitna slabost te metode je pa ta, da lahko s poznavanjem $e$ in $p$ ključ $d$ izračunamo, $d$ je namreč inverz števila $e$ po modulu $p-1$. To slabost odpravi algoritem RSA.
+
+\subsection{Algoritem RSA}
+Algoritem RSA (Rivest, Shamir, Adleman, 1977) podobno kot zgoraj namesto praštevilskega modula vzame modul $r$, ki je produkt dveh velikih praštevil, $r=p\cdot q,\ p\neq q$. Sporočilo zašifriramo kot zgoraj, $x\mapsto y\equiv x^e\pmod r$. Z uporabo dešifrirnega ključa $d$ lahko sporočilo dešifriramo, $y\mapsto y^d\equiv (x^e)^d\equiv x\pmod r$. Pri tem mora veljati
+\begin{align*}
+&(e,\phi(r))=1 & &\text{in} & &d\cdot e\equiv 1 \pmod{(\phi(r)}.
+\end{align*}
+Zdaj brez poznavanja faktorizacije $r=p\cdot q$ iz znanih $e$ in $r$ ne moremo izračunati dešifrirnega ključa $d$.
+
+Ta metoda med drugim omogoča digitalni podpis. Ker bi z razvojem kvantnih računalnikov ta algoritem postal popolnoma neuporaben, se iščejo alternative.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
