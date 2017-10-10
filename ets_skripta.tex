@@ -357,11 +357,13 @@ Množica $\mathbb{R}$ je napolnitev topološkega prostora $\mathbb{Q}$ v standar
 
 \section{Deljivost}
 
-Spomnimo se, da $b$ deli $a$, $b|a$, če obstaja tak $c\in \mathbb{Z}$, da velja $a=b\cdot c$. Iz pravila krajšanja sledi, da je ta $c$ za $b\neq 0$ enolično določen. Kaj pa, če $b \nmid a$?
+Spomnimo se, da $b$ deli $a$, $b|a$, če obstaja tak $c\in \mathbb{Z}$, da velja $a=b\cdot c$. Iz pravila krajšanja sledi, da je ta $c$ za $b\neq 0$ enolično določen. Kaj pa, če $b \nmid a$? Več o tem nam pove naslednji izrek.
 
-\begin{trd}
+\subsection{Osnovni izrek o deljenju}
+
+\begin{izr}[Osnovni izrek o deljenju]
 Naj bo $a\in \mathbb{Z}$ in $b\in \mathbb{N}$. Potem obstajata enolično določeni števili $q,r\in \mathbb{Z},\  0 \leq r < b$, da velja $$a=q\cdot b + r.$$
-\end{trd}
+\end{izr}
 
 \begin{proof}
 Definirajmo množico $R:=\{ a-nb \ | \ n\in \mathbb{Z},\ a-nb \geq 0 \}$. Razmislimo, da tako definirana množica $R$ ni prazna. Če je $a>0$, lahko izberemo $n=0$ in je tako $a\in R$.  Če pa je $a<0$, lahko vzamemo $n=a$ in tako dobimo $a - ab = a(1-b)\geq 0$, saj je $1-b\leq 0$.
@@ -392,6 +394,10 @@ Za $m\in \mathbb{Z}$ lahko vsako celo število zapišemo na enega izmed sledeči
 $$km,\ km+1,\  km+2,\dots,\  km + (m-1)$$
 za neki $k\in \mathbb{Z}.$ Množice $[r] = \{km+r \ | \ k\in \mathbb{Z}\}$ imenujemo \textbf{kongruenčni razredi} po modulu $m$ za $r=0,1,2,\dots,m-1$. Števila $0,1,2,\dots,m-1$ imenujemo \textbf{standardni popolni sistem ostankov} po modulu $m$. Če izberemo po en element iz posameznega kongruenčnega razreda, tako dobimo poljubni popolni sistem ostankov po modulu $m$. Če $a$ in $b$ pripadata istemu kongruenčnemu razredu po modulu $m$, pišemo $$ a\equiv b \pmod{m}.$$ Popolnim sistemom ostankov in kongruencam se bomo podrobneje posvetili v poglavju \ref{kongruence}.
 \end{posl}
+
+\subsection{Vsote kvadratov celih števil}
+
+Na tem mestu si bomo ogledali nekaj lastnosti vsot kvadratov celih števil, kasneje pa bomo to področje raziskali veliko bolj temeljto.
 
 \begin{trd}
 Če lahko $n\in \mathbb{N}$ zapišemo kot vsoto dveh kvadratov celih števil, t.j. če ima enačba $x^2 + y^2 = n$ celoštevilski rešitvi $x$ in $y$, potem $n\not\equiv 3 \pmod{4}$.
