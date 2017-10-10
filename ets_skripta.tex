@@ -356,9 +356,84 @@ Množica $\mathbb{R}$ je napolnitev topološkega prostora $\mathbb{Q}$ v standar
 
 
 \section{Deljivost}
+
+Spomnimo se, da $b$ deli $a$, $b|a$, če obstaja tak $c\in \mathbb{Z}$, da velja $a=b\cdot c$. Iz pravila krajšanja sledi, da je ta $c$ za $b\neq 0$ enolično določen. Kaj pa, če $b \nmid a$?
+
+\begin{trd}
+Naj bo $a\in \mathbb{Z}$ in $b\in \mathbb{N}$. Potem obstajata enolično določeni števili $q,r\in \mathbb{Z},\  0 \leq r < b$, da velja $$a=q\cdot b + r.$$
+\end{trd}
+
+\begin{proof}
+Definirajmo množico $R:=\{ a-nb \ | \ n\in \mathbb{Z},\ a-nb \geq 0 \}$. Razmislimo, da tako definirana množica $R$ ni prazna. Če je $a>0$, lahko izberemo $n=0$ in je tako $a\in R$.  Če pa je $a<0$, lahko vzamemo $n=a$ in tako dobimo $a - ab = a(1-b)\geq 0$, saj je $1-b\leq 0$.
+\\
+Sedaj bomo ločili primera, ko $0\in R$ in $0\notin R$:
+\begin{itemize}
+\item $0\in R:$
+
+Iz definicije množice $R$ sledi $a-nb=0$, oz. $a=nb$. To je že zapis želene oblike, in sicer za $r=0$.
+
+\item $0\notin R:$
+
+Ker $0\notin R$, je $R\subset \mathbb{N}$. Pokazali smo že, da je množica $R$ neprazna, torej lahko uporabimo načelo dobre urejenosti, ki nam pove, da ima množica $R$ najmanjši element. Označimo ta najmanjši element z $r$. Velja $r=a-nb$, kar je enako $a=nb + r$. Pokažimo še, da $r<b$.
+
+Če $r\geq b$, bi obstajal $r_1 \geq 0$, da bi veljalo $r = r_1 + b$. Naprej bi lahko sklepali $a-nb=r=r_1 + b$, kar je ekvivalentno enakosti $a-(n+1)b=r_1$. Slednje bi pomenilo, da je $r_1\in R$, kar pa bi bilo v protislovju s tem, da je $r$ najmanjši element množice $R$.
+
+Preostane še pokazati, da sta števili $q$ in $r$ enolično določeni. Naj velja $a=qb + r=q_1 b + r_1$, kjer $q,q_1,r,r_1\in \mathbb{Z}$ in $0\leq r, r_1 < b$. Sledi
+\begin{align*}
+qb-q_1 b&=r_1 - r \\
+(q-q_1)b&=r_1 - r \implies b|(r_1 - r)
+\end{align*}
+Iz predpostavke $0\leq r, r_1 < b$ sledi $-b < r_1 - r < b$, torej mora veljati $r_1 - r = 0$, od koder takoj sledi tudi $q-q_1 = 0$.
+\end{itemize}
+\end{proof}
+
+\begin{posl}
+Za $m\in \mathbb{Z}$ lahko vsako celo število zapišemo na enega izmed sledečih načinov:
+$$km,\ km+1,\  km+2,\dots,\  km + (m-1)$$
+za neki $k\in \mathbb{Z}.$ Množice $[r] = \{km+r \ | \ k\in \mathbb{Z}\}$ imenujemo \textbf{kongruenčni razredi} po modulu $m$ za $r=0,1,2,\dots,m-1$. Števila $0,1,2,\dots,m-1$ imenujemo \textbf{standardni popolni sistem ostankov} po modulu $m$. Če izberemo po en element iz posameznega kongruenčnega razreda, tako dobimo poljubni popolni sistem ostankov po modulu $m$. Če $a$ in $b$ pripadata istemu kongruenčnemu razredu po modulu $m$, pišemo $$ a\equiv b \pmod{m}.$$ Popolnim sistemom ostankov in kongruencam se bomo podrobneje posvetili v poglavju \ref{kongruence}.
+\end{posl}
+
+\begin{trd}
+Če lahko $n\in \mathbb{N}$ zapišemo kot vsoto dveh kvadratov celih števil, t.j. če ima enačba $x^2 + y^2 = n$ celoštevilski rešitvi $x$ in $y$, potem $n\not\equiv 3 \pmod{4}$.
+\end{trd}
+
+\begin{proof}
+Ogledali si bomo, kakšni so možni ostanki modulo $4$ pri kvadriranju celega števila.
+\begin{itemize}
+\item $x=2k:\ x^2 = 4k^2 \implies x^2 \equiv 0 \pmod4$
+\item $x=2k+1:\ x^2= 4k^2 + 4k + 1 \implies x^2 \equiv 1 \pmod4$
+\end{itemize}
+Možna ostanka pri deljenju kvadrata s $4$ sta torej samo $0$ in $1$. Sledi
+
+\[
+x^2 + y^2\equiv
+\begin{cases}
+0 \pmod4 &;\ x^2\equiv y^2 \equiv 0 \pmod4 \\
+2 \pmod4 &;\ x^2\equiv y^2 \equiv 1 \pmod4 \\
+1 \pmod4 &;\ \text{sicer}
+\end{cases}
+\]
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Diofantske enačbe}
 \section{Multiplikativne funkcije}
-\section{Kongruence}
+\section{Kongruence} \label{kongruence}
 
 \subsection{Definicija in osnovne lastnosti}
 
