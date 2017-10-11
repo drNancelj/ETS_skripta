@@ -648,7 +648,7 @@ kar smo želeli pokazati.
 
 \subsection{Kriteriji za deljivost}
 
-En izmed primerov uporabe kongruenc je določanje kriterijev za deljivost z določenimi števili. Navedli in dokazali bomo kriterije za deljivost s števili $3$, $9$, $11$ in $7$, na enak način pa bi lahko izpelajli kriterije za deljivost s poljubnimi naravnimi števili.
+Eden izmed primerov uporabe kongruenc je določanje kriterijev za deljivost z določenimi števili. Navedli in dokazali bomo kriterije za deljivost s števili $3$, $9$, $11$ in $7$, na enak način pa bi lahko izpelajli kriterije za deljivost s poljubnimi naravnimi števili.
 
 \begin{trd}
 Naj bo $n=\sum_{i=0}^{k} c_{i}10^{i}$ desetiški zapis števila $n\in \mathbb{N}$. Označimo s $s$, $t$ in $w$ sledeče izraze:
@@ -667,6 +667,7 @@ Potem velja:
 \end{trd}
 
 \begin{proof}
+Splošna ideja je sledeča: vsako število $n$ lahko predstavimo v desetiškem zapisu. Če želimo, da bo število $n$ deljivo s številom $q$, mora veljati kongruenca $n\equiv 0 \pmod{q}$, zato naš problem prenesemo v kolobar $\mathbb{Z}_{q}$. S tem pa se desetiški zapis števila poenostavi -- ker je $\mathbb{Z}_{q}$ končni kolobar, se potence vsakega števila, posebej tudi števila $10$, slej ko prej začnejo ponavljati. Tako dobimo vsoto, ki je kongruentna številu $n$ po modulu $q$ in je natanko določena s števkami števila $n$ v desetiškem zapisu. S tem problem deljivosti števila $n$ s $q$ prevedemo na problem deljivosti te vsote s številom $q$. Za določena števila $q$ se omenjena vsota zelo poenostavi in tako res dobimo uporaben kriterij za deljivost, vendar postopek deluje za poljubno število $q$.
 \begin{itemize}
 \item[$(i)$] $10\equiv 1 \pmod 3\implies 10^{i}\equiv 1 \pmod 3 $
 $$ n=\sum_{i=0}^{k}c_{i}10^{i} \equiv \sum_{i=0}^{k}c_{i}1 =s\pmod 3 \ \ \ \checkmark$$
