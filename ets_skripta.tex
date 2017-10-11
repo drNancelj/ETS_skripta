@@ -421,6 +421,126 @@ x^2 + y^2\equiv
 \]
 \end{proof}
 
+Naravno se pojavi vprašanje, ali trditev drži tudi v drugo smer, t.j. ali lahko vsako število $n,\ n\not\equiv 3 \pmod4,$ zapišemo kot vsoto dveh kvadratov celih števil. Hitro najdemo primer, kjer to ne drži -- število $6$ namreč ni vsota kvadratov nobenih dveh celih števil. Vidimo pa, da nam vsota treh kvadratov lahko da vse možne ostanke modulo $4$, kar nas napelje na razmislek o tem, katera števila lahko zapišemo kot vsoto treh kvadratov celih števil. V ta namen si bomo spet ogledali ostanke kvadratov, tokrat po modulu $8$:
+
+\begin{align*}
+x\equiv 0 \pmod4 \implies x^2 \equiv 0 \pmod8 \\
+x\equiv 1 \pmod4 \implies x^2 \equiv 1 \pmod8 \\
+x\equiv 2 \pmod4 \implies x^2 \equiv 4 \pmod8 \\
+x\equiv 3 \pmod4 \implies x^2 \equiv 1 \pmod8
+\end{align*}
+
+Vidimo, da dobimo le ostanke $0$, $1$ in $4$. Če sklepamo podobno kot v dokazu zgornje trditve, ugotovimo, da so možni ostanki vsote treh kvadratov po modulu $8$ naslednji: $0,\ 1,\ 2,\ 3,\ 4,\ 5,\ 6$. Sledi, da števila $n\equiv 7 \pmod8$ ne moremo zapisati kot vsote treh kvadratov celih števil. Za razliko od prej pa tukaj velja obrat, ki ga bomo navedli brez dokaza:
+
+\begin{trd}
+Če je $n\not\equiv 7 \pmod 8$, lahko $n$ zapišemo kot vsoto treh kvadratov celih števil.
+\end{trd}
+
+Brez dokaza bomo navedli tudi sledeči zrek:
+\begin{izr}
+Vsako naravno število je možno zapisati kot vsoto štirih kvadratov celih števil.
+\end{izr}
+
+\subsection{Lastnosti in največji skupni delitelj}
+
+\begin{trd}
+Vsako naravno število $n\in \mathbb{N}$ ima le končno mnogo deliteljev.
+\end{trd}
+
+\begin{proof}
+Pokazali bomo nekaj več, in sicer to, da je vsak delitelj števila $n$ manjši ali enak številu $n$,
+\begin{align*}
+d|n \implies d\leq n, \tag{$\ast$}\label{pomozna}\\
+\end{align*}
+od koder takoj sledi resničnost trditve. Če za $d$ izberemo $1$ ali $n$, implikacija \eqref{pomozna} očitno drži, zato bomo predpostavili $d\neq 0$ in $d\neq n$. Ker $d|n$, obstaja $k\in \mathbb{N}$, da $n=kd$. Če bi bil $k=1$, bi bil $d=n$, torej mora vejati $k\geq 2$. Sledi $n=kd=d + (k-1)d$, kar po definiciji pomeni, da $d<n$, saj je $(k-1)d$ naravno število.
+\end{proof}
+
+\begin{defi}
+Naj bosta $a,b\in \mathbb{Z}$ in ne obe enaki $0$. Njun \textbf{največji skupni delitelj $d$} ali največjo skupno mero označimo $$d=nsd(a,b)=gcd(a,b)=(a,b).$$ (nsd\dots največji skupni delitelj, gcd\dots greatest common divisor)
+\end{defi}
+
+\begin{izr}
+Naj bosta $a,b\in \mathbb{Z}$ in ne obe enaki $0$. Potem je njun največji skupni delitelj najmanjše naravno število v množici $D=\{ ax+by \ | \ w,y\in \mathbb{Z}\}$.
+\end{izr}
+
+\begin{proof}
+Najprej moramo pokazati, da v množici $D$ najmanjše naravno število sploh obstaja. Želeli bi se ponovno sklicati na načelo dobre urejenosti, zato poskusimo ugoditi njegovim predpostavkam. Definirajmo množico \mbox{$D_+ := \{ax+by\ | \ x,y\in \mathbb{Z},\ ax+by>0\}$.} Hitro vidimo, da $D_+$ ni prazna, saj lahko izberemo $x=a$ in $y=b$ in tako vidimo, da $D_+$ gotovo vsebuje element $a^2 + b^2$. Očitno je množica $D_+$ podmnožica naravnih števil. Po načelu dobre urejenosti torej sledi, da ima množica $D_+$ najmanjši element, označimo ga z $d$. Preostane še pokazati, da je $d$ res največji skupni delitelj števil $a$ in $b$. To bomo storili tako, da bomo pokazali, da $d$ res deli obe števili ter da vsi ostali delitelji števil $a$ in $b$ delijo tudi $d$.
+
+Pokažimo, da $d|a$. Da $d|b$, se pokaže analogno. Ker $d \in D_+$, velja $d=ax+by$ za neki števili $x,y\in \mathbb{Z}$. Če $d\nmid a$, potem po osnovnem izreku o deljenju obstajati števili $q,r\in \mathbb{Z},\ 0\leq r< d$, da $a=qd+r$. Če sedaj pokažemo, da je $r\in D_+$, bomo prišli v protislovje s tem, da je $d$ najmanjše število v $D_+$. 
+$$r= a-qd=a-q(ax+by)=a(1-qx) + b(-qy)\ \ \ \checkmark $$
+
+Naj bo $e$ poljuben delitelj števil $a$ in $b$. To pomeni, da 
+\begin{align*}
+a&=a_1 e, \\
+b&=b_1 e.
+\end{align*}
+Sledi $d=ax+by=a_1 ex + b_1 ey=e(a_1 x + b_1 y)$, kar pa po definiciji pomeni $e|d$.
+\end{proof}
+
+\begin{opom}
+Vsak skupni delitelj števil $a$ in $b$ deli njun največji skupni delitelj $(a,b)$.
+\end{opom}
+
+\begin{posl}
+Naj bo $d=(a,b)$. Potem obstajata števili $x,y\in \mathbb{Z}$, da je $d=ax+by$. Posebej, če sta si $a$ in $b$ tuji, se pravi $d=1$, potem ima enačba $ax+by=1$ celoštevilski rešitvi $x$ in $y$.
+\end{posl}
+
+Ko preučujemo deljivost, se naravno pojavi vprašanje, ali lahko pod pogojem, da $a|c$ in $b|c$, sklepamo, da $ab|c$. Odgovor je v splošnem ne, kdaj to drži, pa nam pove naslednja trditev:
+
+\begin{trd}
+Če števili $a$ in $b$ delita število $c$ ter sta si $a$ in $b$ tuji, potem tudi njun produkt $ab$ deli število $c$. Drugače:
+$$a|c \land b|c \land (a,b)=1\implies ab|c.$$
+\end{trd}
+
+\begin{proof}
+\begin{align*}
+a|c &\implies c=a_1 a \\
+b|c &\implies c=b_1 b
+\end{align*}
+Ker $(a,b)=1$, nam prejšnja posledica pove, da obstajata $x,y\in \mathbb{Z}$, da $ax+by=1$. Pomnožimo to enakost s $c$:
+\begin{align*}
+c&=cax + cby \\
+&=b_1 bax + a_1 aby \\
+&=ab(b_1 x + a_1 y)
+\end{align*}
+To pa po definiciji pomeni, da $ab|c$.
+\end{proof}
+ 
+\begin{trd}
+Če število $a$ deli produkt $bc$ ter sta si $a$ in $b$ tuji, potem število $a$ deli število $c$. Drugače:
+$$a|bc \land (a,b)=1\implies a|c.$$
+\end{trd}
+
+\begin{proof}
+$$a|bc \implies bc=a_1 a$$
+Ker $(a,b)=1$, obstajata $x,y\in \mathbb{Z}$, da $ax+by=1$. Pomnožimo to enakost s $c$:
+\begin{align*}
+c&=cax + cby \\
+&=cax + a_1 ay \\
+&=a(cx + a_1 y)
+\end{align*}
+To pa po definiciji pomeni, da $a|c$.
+\end{proof}
+
+\begin{posl}
+Naj bo $p\in \mathbb{P}$ praštevilo. Če $p$ deli $bc$, potem $p$ deli vsaj eno izmed števil $b$ in $c$.
+\end{posl}
+
+\begin{proof}
+\begin{itemize}
+\item Če $p$ deli $b$, potem imata $p$ in $b$ največji skupni deliteli, ki je večji od $1$. Ker je $p$ praštevilo, mora ta delitelj biti kar število $p$.
+\item Če $p$ ne deli $b$, potem $(p,b)=1$ in po zgornji trditvi sledi, da $p$ deli $c$.
+\end{itemize}
+\end{proof}
+
+
+
+
+
+
+
+
+
 
 
 

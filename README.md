@@ -1,6 +1,5 @@
 ﻿# ETS_skripta
-Zapiski s predavanj ETŠ
+Zapiski s predavanj Elementarne teorije števil
 
-Cilji:
-- spremeniti format iz article v book
-- številčenje: rimske za kazalo, arabske za vsebino
+Opravki:
+- spremeniti documentclass iz article v report/book
