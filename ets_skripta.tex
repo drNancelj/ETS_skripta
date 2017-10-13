@@ -532,13 +532,70 @@ Naj bo $p\in \mathbb{P}$ praštevilo. Če $p$ deli $bc$, potem $p$ deli vsaj eno
 \end{posl}
 
 \begin{proof}
-\begin{itemize}
-\item Če $p$ deli $b$, potem imata $p$ in $b$ največji skupni deliteli, ki je večji od $1$. Ker je $p$ praštevilo, mora ta delitelj biti kar število $p$.
-\item Če $p$ ne deli $b$, potem $(p,b)=1$ in po zgornji trditvi sledi, da $p$ deli $c$.
-\end{itemize}
+Če $p$ deli $b$, trditev očitno drži. Če $p$ ne deli $b$, potem $(p,b)=1$ in po zgornji trditvi sledi, da $p$ deli $c$.
 \end{proof}
 
 \subsection{Evklidov algoritem}
+
+Videli smo, da je zelo koristno poznati največji skupni delitelj dveh števil. To nas seveda napelje k temu, da želimo najti metodo, s katero lahko največji skupni delitelj dveh števil izračunamo. Učinkovita metoda, ki nam to omogoča, je Evklidov algoritem (od sedaj naprej EA).
+
+Evklidov algoritem je zaporedna uporaba deljenja z ostankom. Recimo, da želimo izračunati največji skupni delitelj celih števil $a$ in $b$ in privzemimo, da sta obe števili pozitivni (če je katero negativno, lahko vzamemo njegovo nasprotno vrednost in to na največji skupni delitelj ne vpliva). Označimo $a=r_{-1}$ in $b=r_0$ ter vzemimo par $(r_{-1}, r_0)$ (razumimo ta zapis kot urejeni par in ne kot največji skupni delitelj števil $r_{-1}$ in $r_0$). Po osnovnem izreku o deljenju lahko zapišemo
+$$r_{-1} = q_1 r_0 + r_1,$$
+pri čemer $q_1\in \mathbb{Z}$ in $0\leq r_1 < r_0$. Če $r_1 \neq 0$, par $(r_{-1}, r_0)$ zamenjamo s parom $(r_0, r_1)$ in postopek nadaljujemo. Ker pa vselej velja zveza $0\leq r_{i+1} < r_i$, se algoritem po končnem številu korakov gotovo ustavi,
+\begin{align*}
+r_{n-2} &= q_n r_{n-1} + r_n, \\
+r_{n-1} &= q_{n+1} r_n + r_{n+1}=  q_{n+1} r_n.
+\end{align*}
+
+\begin{izr}
+Zadnji neničelni ostanek $r_n$ v Evklidovem algoritmu za $a$ in $b$ je največji skupni delitelj števil $a$ in $b$.
+\end{izr}
+
+Preden ta izrek dokažemo, demonstrirajmo primer uporabe EA.
+
+\begin{prim}
+Poiščimo največji skupni delitelj števil $64$ in $156$:
+\begin{align*}
+156 &= 2\cdot 64 + 28 \\
+64 &= 2\cdot 28 + 8 \\
+28 &= 3\cdot 8 + 4 \\
+8 &= 2\cdot 4 + 0
+\end{align*} 
+Največji skupni delitelj števil $64$ in $156$ je torej število $4$.
+\end{prim}
+
+\begin{proof}
+Najprej bomo pokazali, da je $r_n$ res delitelj števil $a$ in $b$, nato pa še, da vsak drug delitelj števil $a$ in $b$ deli tudi $r_n$.
+\begin{itemize}
+\item Iz zadnje enačbe EA, $r_{n-1} = q_{n+1}r_n,$ sledi $r_n|r_{n-1}$. Zadnjo enačbo lahko vstavimo v predzadnjo in dobimo
+$r_{n-2} = q_n r_{n-1} + r_n = q_n q_{n+1}r_n + r_n= (q_n q_{n+1}+1)r_n$, kar pa pomeni $r_n | r_{n-2}$. Induktivno sledi
+$$r_n | r_i,\ \forall i=n-1,n-2,\dots,0,-1,$$
+kar pa pomeni, da $r_n$ deli tudi $a=r_{-1}$ in $b=r_0$.
+\item Naj bo $e$ poljubni delitelj števil $a$ in $b$. Oglejmo si prvo enačbo EA, $r_1 = a - q_1 b$. Ker $e$ deli $a$ in $b$, deli tudi $r_1$. Iz druge enačbe, $r_2 = b - q_2 r_1,$ sledi, da $e$ deli tudi $r_2$, saj iz prve enačbe vemo, da $e|r_1$. Induktivno sledi
+$$e|r_i,\ \forall i\in \mathbb{N},$$
+kar pa pomeni, da $e$ deli tudi $r_n$.
+\end{itemize}
+\end{proof}
+
+Omenili smo že, da je EA učinkovita računska metoda za določanje največjega skupnega delitelja. Zanima nas, kako učinkovita ta metoda resnično je --  koliko korakov je potrebnih oz. kolikšna je dolžina $n$ algoritma? Očitno velja $n<b$, saj se ostanek z vsakim korakom zmanjša, vendar je ta ocena zelo slaba. Boljšo oceno nam da Lam\'ejev izrek:
+
+\begin{izr}[Lam\'e]
+Število korakov $n$ v Evklidovem algoritmu za $a$ in $b$, \mbox{$a>b>0$}, je kvečjemu $5\delta$, kjer je $\delta$ število decimalnih mest v $b$. Drugače: $$n\leq 5\delta$$
+\end{izr}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
