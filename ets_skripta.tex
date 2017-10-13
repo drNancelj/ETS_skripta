@@ -38,8 +38,7 @@
 
 	{\large 2016/2017\par}
 \end{titlepage}
-\noindent Nastanek teh skript je motivirala predvsem želja po urejenih zapiskih pri predmetu Elementarna teorija števil, delno pa sem želel tudi olajšati študij tega predmeta svojim kolegom. Snov je v celoti povzeta po predavanjih profesorja Saša Strleta, kot jo je predaval v študijskem letu 2016/17. Moja \sout{skromna} vloga pri nastanku tega teksta je večinoma ta prepisovalca, ponekod pa tudi dopolnim dokaze, ki so na predavanjih bili izpuščeni bodisi zaradi preproste narave bodisi zaradi obravnave pri predmetih, ki naj bi na tej točki že bili opravljeni.
-
+\noindent Nastanek teh skript je motivirala predvsem želja po urejenih zapiskih pri predmetu Elementarna teorija števil, delno pa sem želel tudi olajšati študij tega predmeta svojim kolegom. Snov je v celoti povzeta po predavanjih profesorja Saša Strleta, kot jo je predaval v študijskem letu 2016/17. Moja \sout{skromna} vloga pri nastanku tega teksta je večinoma ta prepisovalca, ponekod pa tudi dopolnim dokaze, ki so na predavanjih bili izpuščeni bodisi zaradi preproste narave bodisi zaradi obravnave pri drugih predmetih.
 \newpage
 
 	\tableofcontents
@@ -241,7 +240,7 @@ Iz teh definicij lahko določimo osnovne lastnosti računskih operacij. Te so as
 n\cdot l &= m\cdot l \Rightarrow n=m
 \end{align*}
 
-Pokazali bomo, do prvo pravilo krajšanja res velja, drugo pa se dokaže na podoben način. Dokaza se bomo lotili z indukcijo po $l$. V nadaljevanju bomo uporabljali standardne oznake za naravna števila, samo množico bomo pa označevali z $\mathbb{N}$.
+Pokazali bomo, da prvo pravilo krajšanja res velja, drugo pa se dokaže na podoben način. Dokaza se bomo lotili z indukcijo po $l$. V nadaljevanju bomo uporabljali standardne oznake za naravna števila, samo množico bomo pa označevali z $\mathbb{N}$.
 
 \begin{itemize}
 \item[$l=1:$] $n+1 = m+1  \iff \phi(n) = \phi(m) \xRightarrow{inj.} n=m$ \checkmark
@@ -437,7 +436,7 @@ Vidimo, da dobimo le ostanke $0$, $1$ in $4$. Če sklepamo podobno kot v dokazu 
 Če je $n\not\equiv 7 \pmod 8$, lahko $n$ zapišemo kot vsoto treh kvadratov celih števil.
 \end{trd}
 
-Brez dokaza bomo navedli tudi sledeči zrek:
+Brez dokaza bomo navedli tudi sledeči izrek:
 \begin{izr}
 Vsako naravno število je možno zapisati kot vsoto štirih kvadratov celih števil.
 \end{izr}
@@ -535,6 +534,8 @@ Naj bo $p\in \mathbb{P}$ praštevilo. Če $p$ deli $bc$, potem $p$ deli vsaj eno
 Če $p$ deli $b$, trditev očitno drži. Če $p$ ne deli $b$, potem $(p,b)=1$ in po zgornji trditvi sledi, da $p$ deli $c$.
 \end{proof}
 
+Spomnimo se, da je to ravno definicija primitivnega elementa.
+
 \subsection{Evklidov algoritem}
 
 Videli smo, da je zelo koristno poznati največji skupni delitelj dveh števil. To nas seveda napelje k temu, da želimo najti metodo, s katero lahko največji skupni delitelj dveh števil izračunamo. Učinkovita metoda, ki nam to omogoča, je Evklidov algoritem (od sedaj naprej EA).
@@ -584,7 +585,7 @@ Omenili smo že, da je EA učinkovita računska metoda za določanje največjega
 \end{izr}
 
 \begin{proof}
-Naj bo $n$ dolžina EA, t.j. $r_n$ je zadnji neničelni ostanek. Ker \mbox{$a>b>0$}, so $q_i$ naravna števila. Prav tako velja $q_{n+1}>1$, saj bi sicer veljalo $r_{n-1}=r_n$. Dolžino EA bomo sedaj ocenili tako, da bomo ostanke $r_i$ primerjali s členi Fibonaccijevega zaporedja. Fibonaccijevo zaporedje $\{F_n\}_{n\in \mathbb{N}}$ ponavadi podamo z rekurzivno zvezo $F_i=F_{i-1}+F_{i-2}$ pri začetnih pogojih $F_0 = 0$ in $F_1=1$. V dokazu tega izreka pa nam bo prav prišla tudi formula za splošni člen Fibonaccijevega zaporedja:
+Naj bo $n$ dolžina EA, t.j. $r_n$ je zadnji neničelni ostanek. Ker \mbox{$a>b>0$}, so $q_i$ naravna števila. Prav tako velja $q_{n+1}\geq 2$, saj bi sicer veljalo $r_{n-1}=r_n$. Dolžino EA bomo sedaj ocenili tako, da bomo ostanke $r_i$ primerjali s členi Fibonaccijevega zaporedja. Fibonaccijevo zaporedje $\{F_n\}_{n\in \mathbb{N}}$ ponavadi podamo z rekurzivno zvezo $F_i=F_{i-1}+F_{i-2}$ pri začetnih pogojih $F_0 = 0$ in $F_1=1$. V dokazu tega izreka pa nam bo prav prišla tudi formula za splošni člen Fibonaccijevega zaporedja:
 $$F_n = \frac{x^n-y^n}{x-y},$$
 kjer
 \begin{align*}
