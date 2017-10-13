@@ -539,7 +539,7 @@ Naj bo $p\in \mathbb{P}$ praštevilo. Če $p$ deli $bc$, potem $p$ deli vsaj eno
 
 Videli smo, da je zelo koristno poznati največji skupni delitelj dveh števil. To nas seveda napelje k temu, da želimo najti metodo, s katero lahko največji skupni delitelj dveh števil izračunamo. Učinkovita metoda, ki nam to omogoča, je Evklidov algoritem (od sedaj naprej EA).
 
-Evklidov algoritem je zaporedna uporaba deljenja z ostankom. Recimo, da želimo izračunati največji skupni delitelj celih števil $a$ in $b$ in privzemimo, da sta obe števili pozitivni (če je katero negativno, lahko vzamemo njegovo nasprotno vrednost in to na največji skupni delitelj ne vpliva). Označimo $a=r_{-1}$ in $b=r_0$ ter vzemimo par $(r_{-1}, r_0)$ (razumimo ta zapis kot urejeni par in ne kot največji skupni delitelj števil $r_{-1}$ in $r_0$). Po osnovnem izreku o deljenju lahko zapišemo
+\textbf{Evklidov algoritem} je zaporedna uporaba deljenja z ostankom. Recimo, da želimo izračunati največji skupni delitelj celih števil $a$ in $b$ in privzemimo, da sta obe števili pozitivni (če je katero negativno, lahko vzamemo njegovo nasprotno vrednost in to na največji skupni delitelj ne vpliva). Označimo $a=r_{-1}$ in $b=r_0$ ter vzemimo par $(a,b)=(r_{-1}, r_0)$ (razumimo ta zapis kot urejeni par in ne kot največji skupni delitelj števil $r_{-1}$ in $r_0$). Po osnovnem izreku o deljenju lahko zapišemo
 $$r_{-1} = q_1 r_0 + r_1,$$
 pri čemer $q_1\in \mathbb{Z}$ in $0\leq r_1 < r_0$. Če $r_1 \neq 0$, par $(r_{-1}, r_0)$ zamenjamo s parom $(r_0, r_1)$ in postopek nadaljujemo. Ker pa vselej velja zveza $0\leq r_{i+1} < r_i$, se algoritem po končnem številu korakov gotovo ustavi,
 \begin{align*}
@@ -572,7 +572,7 @@ $r_{n-2} = q_n r_{n-1} + r_n = q_n q_{n+1}r_n + r_n= (q_n q_{n+1}+1)r_n$, kar pa
 $$r_n | r_i,\ \forall i=n-1,n-2,\dots,0,-1,$$
 kar pa pomeni, da $r_n$ deli tudi $a=r_{-1}$ in $b=r_0$.
 \item Naj bo $e$ poljubni delitelj števil $a$ in $b$. Oglejmo si prvo enačbo EA, $r_1 = a - q_1 b$. Ker $e$ deli $a$ in $b$, deli tudi $r_1$. Iz druge enačbe, $r_2 = b - q_2 r_1,$ sledi, da $e$ deli tudi $r_2$, saj iz prve enačbe vemo, da $e|r_1$. Induktivno sledi
-$$e|r_i,\ \forall i\in \mathbb{N},$$
+$$e|r_i,\ \forall i=-1,0,\dots,n,$$
 kar pa pomeni, da $e$ deli tudi $r_n$.
 \end{itemize}
 \end{proof}
@@ -583,7 +583,34 @@ Omenili smo že, da je EA učinkovita računska metoda za določanje največjega
 Število korakov $n$ v Evklidovem algoritmu za $a$ in $b$, \mbox{$a>b>0$}, je kvečjemu $5\delta$, kjer je $\delta$ število decimalnih mest v $b$. Drugače: $$n\leq 5\delta$$
 \end{izr}
 
-
+\begin{proof}
+Naj bo $n$ dolžina EA, t.j. $r_n$ je zadnji neničelni ostanek. Ker \mbox{$a>b>0$}, so $q_i$ naravna števila. Prav tako velja $q_{n+1}>1$, saj bi sicer veljalo $r_{n-1}=r_n$. Dolžino EA bomo sedaj ocenili tako, da bomo ostanke $r_i$ primerjali s členi Fibonaccijevega zaporedja. Fibonaccijevo zaporedje $\{F_n\}_{n\in \mathbb{N}}$ ponavadi podamo z rekurzivno zvezo $F_i=F_{i-1}+F_{i-2}$ pri začetnih pogojih $F_0 = 0$ in $F_1=1$. V dokazu tega izreka pa nam bo prav prišla tudi formula za splošni člen Fibonaccijevega zaporedja:
+$$F_n = \frac{x^n-y^n}{x-y},$$
+kjer
+\begin{align*}
+&x=\frac{1 + \sqrt{5}}{2} &\text{in}&  &y=\frac{1 - \sqrt{5}}{2}.
+\end{align*}
+Opazimo, da $x>1$ in $y\in (-1,0)$. Pričnimo sedaj z ocenami ostankov:
+\begin{align*}
+r_n &\geq 1 = F_2 \\
+r_{n-1} &= q_{n+1} r_n \geq 2\cdot 1 = 2 = F_3 \\
+r_{n-2} &=q_n r_{n-1} + r_n \geq r_{n-1} + r_n \geq F_3 + F_2 = F_4 \\
+r_{n-3} &= q_{n-1} r_{n-2} + r_{n-1} \geq r_{n-2} + r_{n-1} \geq F_4 + F_3 = F_5 \\
+&\vdots \\
+r_1 &= q_3 r_2 + r_3 \geq r_2 + r_3 \geq F_n + F_{n-1} = F_{n+1} \\
+b &= q_2 r_1 + r_2 \geq r_1 + r_2 \geq F_{n+1} + F_n = F_{n+2}
+\end{align*}
+Dobili smo torej oceno $b\geq F_{n+2}$. Sledi
+\begin{align*}
+b &\geq F_{n+2} = \frac{x^{n+2}-y^{n+2}}{x-y} \geq \frac{x^{n+2} -1}{x^2} \geq x^n - 1 \\
+x^n &\leq b+1 \implies n\leq \frac{\log_{10}{(b+1)}}{\log_{10}x} \overset{(*)}{\leq} 5 \cdot \delta,
+\end{align*}
+kjer smo v koraku $(*)$ upoštevali sledeči oceni:
+\begin{itemize}
+\item če ima število $b$ $\delta$ decimalnih mest, velja $b+1\leq 10^{\delta}$,
+\item $\log_{10}x \overset{.}{=} 0,2 = \frac{1}{5}$.
+\end{itemize}
+\end{proof}
 
 
 
